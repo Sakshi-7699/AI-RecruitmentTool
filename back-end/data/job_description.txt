@@ -1,0 +1,39 @@
+JOB DESCRIPTION
+MORE ABOUT THIS JOB
+Please note division and function examples are representative of opportunities common for this skill-set. The list is not exhaustive, and availability of open roles is determined based on business need. Specific roles will be confirmed through the interview process.
+
+ 
+
+RESPONSIBILITIES
+Software engineers primarily focus on software design and development. This is meant to cover most programming positions in Engineering, and include positions that were previously considered business software engineers, platform engineers, and quality assurance engineers.  Combine the best open source software, databases, cloud solutions, and programming languages, to solve problems and provide accurate, complex, scalable applications that help our business and clients gain new insights.
+
+ As a software engineer, you are the change agents that transform Goldman Sachs by applying your technical know-how.Be a part of our embedded engineering teams, that work as a unit with our business partners. Collaborate with trading, sales, asset management, banking, finance and others, to build and automate solutions to keep our firm’s position on the cutting edge. Or, join our core engineering teams, and elevate all of our businesses by providing reliable, scalable platforms for data engineering, machine learning, networking, developer tooling, collaboration and more.
+
+Innovate with UI/UX designers, data scientists, cloud engineers, and more in a collaborative, agile environment where your enthusiasm to take on new problems and learn will have an immediate impact.
+
+BASIC QUALIFICATIONS
+
+Bachelor’s degree or relevant work experience in Computer Science, Mathematics, Electrical Engineering or related technical discipline.
+Excellent object oriented or functional analysis and design skills.
+Knowledge of data structures, algorithms, and designing for performance.
+Excellent written and verbal communication skills.
+Ability to solve problems and apply analysis to make data driven decisions.
+Comfortable multi-tasking, managing multiple stakeholders and working as part of a global team.
+Can apply an entrepreneurial approach and passion to problem solving and product development.
+1+ years of software development experience.
+Expert Knowledge in One Or More Of
+
+Programming in a complied language such as Java, or C++ or an interpreted language such as Python and experience with concurrency and memory management.
+Responsive web development, with professional React/Angular/Redux experience and advanced JavaScript proficiency.
+NoSQL databases such as MongoDb and Elastic Search.
+Preferred Qualifications
+
+Knowledge or interest in trading technologies in the front-office of a trading organization
+B.S. or M.S. Computer Science or Related field.
+ABOUT GOLDMAN SACHS
+
+At Goldman Sachs, we commit our people, capital and ideas to help our clients, shareholders and the communities we serve to grow. Founded in 1869, we are a leading global investment banking, securities and investment management firm. Headquartered in New York, we maintain offices around the world. 
+
+We believe who you are makes you better at what you do. We're committed to fostering and advancing diversity and inclusion in our own workplace and beyond by ensuring every individual within our firm has a number of opportunities to grow professionally and personally, from our training and development opportunities and firmwide networks to benefits, wellness and personal finance offerings and mindfulness programs. Learn more about our culture, benefits, and people at GS.com/careers. 
+
+We’re committed to finding reasonable accommodations for candidates with special needs or disabilities during our recruiting process. Learn more: https://www.goldmansachs.com/careers/footer/disability-statement.html
