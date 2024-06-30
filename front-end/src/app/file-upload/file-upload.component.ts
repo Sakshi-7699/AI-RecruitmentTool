@@ -10,7 +10,7 @@ import { AlgoResponseService } from '../services/algo-response.service';
 })
 export class FileUploadComponent {
 
-  data : any =  ''
+  data : any = {'Response' : 0}
 
   constructor( private algo_response_service : AlgoResponseService) {}
 
@@ -20,7 +20,7 @@ export class FileUploadComponent {
     console.log(this.data)
   }
   getAll(){
-    this.algo_response_service.getAll().subscribe({
+    this.algo_response_service.getAll('Response').subscribe({
       next:data=>{
        this.data = data
       }
