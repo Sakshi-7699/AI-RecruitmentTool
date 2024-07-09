@@ -39,5 +39,13 @@ async def upload_file(file: UploadFile = File(...), job_description: str = Form(
         response = cv.count_vectorizer()
         return { 'Response' : response }
 
+
+@app.get('/summarize')
+async def generate_summary() :
+    data = "I am Jessica and I will share brownie w sakshi"
+    algo = algorithms.Algorithms()
+    result = algo.generate_summary(data)
+    return result
+
 if __name__ == "__main__":
     uvicorn.run("main:app", host="127.0.0.1", port=8000)

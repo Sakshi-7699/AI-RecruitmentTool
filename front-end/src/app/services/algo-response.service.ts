@@ -7,14 +7,22 @@ import { Observable, map } from 'rxjs';
 })
 export class AlgoResponseService {
 
-  readonly rootUrl = 'http://127.0.0.1:8000/count-vectorizer'
+  readonly rootUrl = 'http://127.0.0.1:8000/'
   constructor(private http : HttpClient) { }
 
   getAll(key: string):Observable<any[]>{
-    return this.http.get<any>(this.rootUrl).pipe(
+    return this.http.get<any>(this.rootUrl + 'count-vectorizer').pipe(
       map(response => response[key])  // Extract the specific key from the response
     );
+  
   }
+  getSummary():Observable<any[]>{
+    return this.http.get<any>(this.rootUrl + 'summarize').pipe(
+      map(response => response)  // Extract the specific key from the response
+    );
+  }
+
+
 
 
 }
