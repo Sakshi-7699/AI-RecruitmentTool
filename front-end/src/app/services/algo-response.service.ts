@@ -23,7 +23,8 @@ export class AlgoResponseService {
   }
 
 
-  uploadFiles(formData: FormData): Observable<any> {
+  uploadFiles(formData: any): Observable<any> {
+    console.log('data received : ',formData)
     return this.http.post(this.rootUrl + 'upload/', formData);
   }
 

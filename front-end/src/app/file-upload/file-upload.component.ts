@@ -1,53 +1,58 @@
-import { Component, Input, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, EventEmitter, Output, OnInit } from '@angular/core';
 import { AlgoResponseService } from '../services/algo-response.service';
-import {FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup, FormControl} from '@angular/forms';
+import { FormBuilder, Validators, FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-
-import {LiveAnnouncer} from '@angular/cdk/a11y';
-import {ChangeDetectionStrategy,  computed, inject, model, signal} from '@angular/core';
-import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
-
-
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { ChangeDetectionStrategy, computed, inject, model, signal } from '@angular/core';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.css']
 })
-export class FileUploadComponent {
-  
+export class FileUploadComponent implements OnInit {
 
-
-
-  
-  constructor(private algoservice : AlgoResponseService, private _formBuilder: FormBuilder) {
-   
-
+  constructor(private algoservice: AlgoResponseService, private _formBuilder: FormBuilder) {
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required],
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      jobDescription: ['', Validators.required],
+    });
   }
 
-  firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
-  });
-  secondFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
-  });
 
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
 
-
-  ngOnInit() {
-    
-    
-  }
-
-  // File Upload  __________________________________________________________________________________
-
- 
   @ViewChild('resumeInput', { static: false }) resumeInput!: ElementRef;
   @ViewChild('coverLetterInput', { static: false }) coverLetterInput!: ElementRef;
-  
+
   resumeFiles: File[] = [];
   coverLetterFiles: File[] = [];
+
+  // Behavioral module
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  readonly currentFruit = model('');
+  readonly fruits = signal(['Leadership']);
+  readonly allFruits: string[] = ['Meritocracy', 'Leadership', 'Emotional Intelligence'];
+  readonly filteredFruits = computed(() => {
+    const currentFruit = this.currentFruit().toLowerCase();
+    return currentFruit ? this.allFruits.filter(fruit => fruit.toLowerCase().includes(currentFruit)) : this.allFruits.slice();
+  });
+
+  readonly announcer = inject(LiveAnnouncer);
+
+  ngOnInit() {
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required],
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      jobDescription: ['', Validators.required],
+    });
+  }
 
   onFileSelected(event: Event, fileType: string): void {
     const input = event.target as HTMLInputElement;
@@ -85,7 +90,6 @@ export class FileUploadComponent {
 
   onUpload(): void {
     if (this.resumeFiles.length && this.coverLetterFiles.length) {
-      // Implement your upload logic here
       console.log('Uploading resume:', this.resumeFiles);
       console.log('Uploading cover letter:', this.coverLetterFiles);
     } else {
@@ -93,31 +97,11 @@ export class FileUploadComponent {
     }
   }
 
-
-  // behavioral module __________________________________________________________________________________
-
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  readonly currentFruit = model('');
-  readonly fruits = signal(['Leadership']);
-  readonly allFruits: string[] = ['Meritocracy', 'Leadership', 'Emotional Intelligence'];
-  readonly filteredFruits = computed(() => {
-    const currentFruit = this.currentFruit().toLowerCase();
-    return currentFruit
-      ? this.allFruits.filter(fruit => fruit.toLowerCase().includes(currentFruit))
-      : this.allFruits.slice();
-  });
-
-  readonly announcer = inject(LiveAnnouncer);
-
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
-
-    // Add our fruit
     if (value) {
       this.fruits.update(fruits => [...fruits, value]);
     }
-
-    // Clear the input value
     this.currentFruit.set('');
   }
 
@@ -127,7 +111,6 @@ export class FileUploadComponent {
       if (index < 0) {
         return fruits;
       }
-
       fruits.splice(index, 1);
       this.announcer.announce(`Removed ${fruit}`);
       return [...fruits];
@@ -140,7 +123,17 @@ export class FileUploadComponent {
     event.option.deselect();
   }
 
-  
-
-  
+  submit(): void {
+    const formData = {
+      resumeFiles: this.resumeFiles,
+      coverLetterFiles: this.coverLetterFiles,
+      jobDescription: this.secondFormGroup.value.jobDescription,
+      behavioralValues: this.fruits()
+    };
+    this.algoservice.uploadFiles(formData).subscribe(response => {
+      console.log('Form submitted successfully', response);
+    }, error => {
+      console.error('Form submission error', error);
+    });
+  }
 }
