@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {Component} from '@angular/core';
+import {MatChipInputEvent} from '@angular/material/chips';
+
+export interface Fruit {
+  name: string;
+}
 
 @Component({
   selector: 'app-home',
@@ -7,4 +13,5 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+  
 }

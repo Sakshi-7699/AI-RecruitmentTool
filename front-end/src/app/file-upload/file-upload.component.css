@@ -1,0 +1,9 @@
+.drag-drop-area {
+  border: 2px dashed #191a1b;
+  padding: 80px;
+  text-align: center;
+  cursor: pointer;
+}
+.drag-drop-area p {
+  margin: 0;
+}

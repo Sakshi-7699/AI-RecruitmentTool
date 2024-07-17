@@ -6,6 +6,9 @@ import uvicorn
 
 import algorithms
 
+from fastapi.responses import JSONResponse
+import shutil
+import os
 
 app = FastAPI()
 # Configure CORS
@@ -31,13 +34,20 @@ def run_count_vectorizer():
     response = cv.count_vectorizer()
     return { 'Response' : response }
 
-@app.post("/count-vectorizer/")
-async def upload_file(file: UploadFile = File(...), job_description: str = Form(...)):
-        resume_path = file
-        job_description = job_description
-        cv =  algorithms.Algorithms(resume_path,job_description)
-        response = cv.count_vectorizer()
-        return { 'Response' : response }
+@app.post("/upload/")
+async def upload_file(file: UploadFile = File(...), description: str = Form(...)):
+    # Save the uploaded file
+    upload_folder = "data/"
+    os.makedirs(upload_folder, exist_ok=True)
+    file_location = f"{upload_folder}{file.filename}"
+    with open(file_location, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    # Process the description
+    print(f"Description: {description}")
+
+    return JSONResponse(content={"filename": file.filename, "description": description})
+
 
 
 @app.get('/summarize')

@@ -8,6 +8,23 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { AlgoResponseService } from './services/algo-response.service';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatChipsModule} from '@angular/material/chips';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+
 
 @NgModule({
   declarations: [
@@ -19,10 +36,23 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
-
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatChipsModule,
+    MatCardModule,
+    MatAutocompleteModule,
+    BrowserAnimationsModule,
+    MatStepperModule,
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync(),
+    AlgoResponseService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
