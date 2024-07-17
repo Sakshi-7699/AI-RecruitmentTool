@@ -83,6 +83,38 @@
             <div class="card-body">
               <h5 class="card-title">Enter Behavioral Values</h5>
               
+
+              <form>
+                <mat-form-field class="example-chip-list">
+                  <mat-chip-grid #chipGrid aria-label="Fruit selection">
+                    @for (fruit of fruits(); track $index) {
+                      <mat-chip-row (removed)="remove(fruit)">
+                        {{fruit}}
+                        <button matChipRemove [attr.aria-label]="'remove ' + fruit">
+                          <mat-icon>cancel</mat-icon>
+                        </button>
+                      </mat-chip-row>
+                    }
+                  </mat-chip-grid>
+                  <input
+                    name="currentFruit"
+                    placeholder="Enter new Behaviour..."
+                    #fruitInput
+                    [(ngModel)]="currentFruit"
+                    [matChipInputFor]="chipGrid"
+                    [matAutocomplete]="auto"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="add($event)"
+                  />
+                  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    @for (fruit of filteredFruits(); track fruit) {
+                      <mat-option [value]="fruit">{{fruit}}</mat-option>
+                    }
+                  </mat-autocomplete>
+                </mat-form-field>
+              </form>
+
+
             </div>
           </div>
         </div>
