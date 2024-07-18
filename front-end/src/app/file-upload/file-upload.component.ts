@@ -6,6 +6,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { ChangeDetectionStrategy, computed, inject, model, signal } from '@angular/core';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-file-upload',
@@ -90,8 +91,17 @@ export class FileUploadComponent implements OnInit {
 
   onUpload(): void {
     if (this.resumeFiles.length && this.coverLetterFiles.length) {
-      console.log('Uploading resume:', this.resumeFiles);
-      console.log('Uploading cover letter:', this.coverLetterFiles);
+      const formData = new FormData();
+      this.resumeFiles.forEach(file => formData.append('resume', file));
+      this.coverLetterFiles.forEach(file => formData.append('cover_letter', file));
+      formData.append('job_description', this.secondFormGroup.value.jobDescription);
+      formData.append('behavioral_values', JSON.stringify(this.fruits()));
+  
+      // this.algoservice.uploadFiles(formData).subscribe(response => {
+      //   console.log('Form submitted successfully', response);
+      // }, error => {
+      //   console.error('Form submission error', error);
+      // });
     } else {
       console.error('Both resume and cover letter must be selected');
     }
@@ -123,14 +133,25 @@ export class FileUploadComponent implements OnInit {
     event.option.deselect();
   }
 
+  private convertToBinary(file: File) {
+    const reader = new FileReader()
+
+    reader.readAsArrayBuffer(file);
+    return reader
+  }
+
+  
+
   submit(): void {
     const formData = {
-      resumeFiles: this.resumeFiles,
-      coverLetterFiles: this.coverLetterFiles,
-      jobDescription: this.secondFormGroup.value.jobDescription,
-      behavioralValues: this.fruits()
+      resume: this.convertToBinary(this.resumeFiles[0]),
+      cover_letter: this.convertToBinary(this.coverLetterFiles[0]),
+      job_description: this.secondFormGroup.value.jobDescription,
+      behavioral_values: this.fruits()
     };
-    this.algoservice.uploadFiles(formData).subscribe(response => {
+    this.algoservice.uploadFiles(this.resumeFiles[0], this.coverLetterFiles[0], 
+      this.secondFormGroup.value.jobDescription,
+      this.fruits()).subscribe(response => {
       console.log('Form submitted successfully', response);
     }, error => {
       console.error('Form submission error', error);

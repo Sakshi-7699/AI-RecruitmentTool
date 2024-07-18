@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
 @Injectable({
@@ -7,7 +7,7 @@ import { Observable, map } from 'rxjs';
 })
 export class AlgoResponseService {
 
-  readonly rootUrl = 'http://127.0.0.1:8000/'
+  readonly rootUrl = 'http://localhost:8000/'
   constructor(private http : HttpClient) { }
 
   getAll(key: string):Observable<any[]>{
@@ -22,12 +22,32 @@ export class AlgoResponseService {
     );
   }
 
+  headers = new HttpHeaders({
+    'Content-Type': 'application/json',  // Assuming the backend expects JSON
+  });
 
-  uploadFiles(formData: any): Observable<any> {
-    console.log('data received : ',formData)
-    return this.http.post(this.rootUrl + 'upload/', formData);
+  // uploadFiles(formData: any): Observable<any> {
+  //   console.log('data received : ',formData)
+  //   return this.http.post(this.rootUrl + 'upload', formData, { headers : new HttpHeaders({
+  //     'Content-Type': 'application/json',  // Assuming the backend expects JSON
+  //   })  })
+  // }
+
+
+  uploadFiles(
+    resume: File,
+    coverLetter: File,
+    jobDescription: string,
+    behavioralValues: string[]
+  ): Observable<any> {
+    const formData = new FormData();
+    formData.append('resume', resume);
+    formData.append('cover_letter', coverLetter);
+    formData.append('job_description', jobDescription);
+    formData.append('behavioral_values', JSON.stringify(behavioralValues)); // Convert array to JSON string
+
+    return this.http.post(this.rootUrl + 'upload', formData);
   }
-
 
 
 }
