@@ -7,3 +7,8 @@
 .drag-drop-area p {
   margin: 0;
 }
+
+.jd-area {
+  border: 2px dashed #191a1b;
+  padding: 80px;
+}

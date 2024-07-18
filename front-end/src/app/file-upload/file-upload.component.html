@@ -2,6 +2,11 @@
   <div class="row">
     <br><br>
     <h1 class="text-center">Candidate Compatibility Checker</h1>
+
+    <br><br><br>
+
+
+
     <mat-stepper orientation="horizontal" #stepper>
       
       <!-- Step 1: Candidate Data -->
@@ -22,7 +27,8 @@
                       <p>Drag and drop your resume here, or click to select file</p>
                       <input type="file" (change)="onFileSelected($event, 'resume')" hidden #resumeInput>
                     </div>
-                    <button mat-button (click)="resumeInput.click()">Choose Resume</button>
+                    <br>
+                    <button mat-raised-button color="warn" (click)="resumeInput.click()">Choose Resume</button>
                     <ul class="list-group mt-3">
                       <li class="list-group-item" *ngFor="let file of resumeFiles">{{ file.name }}</li>
                     </ul>
@@ -34,20 +40,21 @@
                       <p>Drag and drop your cover letter here, or click to select file</p>
                       <input type="file" (change)="onFileSelected($event, 'coverLetter')" hidden #coverLetterInput>
                     </div>
-                    <button mat-button (click)="coverLetterInput.click()">Choose Cover Letter</button>
+                    <br>
+                    <button mat-raised-button (click)="coverLetterInput.click()">Choose Cover Letter</button>
                     <ul class="list-group mt-3">
                       <li class="list-group-item" *ngFor="let file of coverLetterFiles">{{ file.name }}</li>
                     </ul>
                   </div>
                 </div>
                 <br><br><br>
-                <button mat-button (click)="onUpload()" [disabled]="!resumeFiles.length || !coverLetterFiles.length">Upload</button>
+                <button mat-raised-button (click)="onUpload()" [disabled]="!resumeFiles.length || !coverLetterFiles.length">Upload</button>
               </div>
             </div>
           </div>
-          <br><br><br>
+          <br><br>
           <div>
-            <button mat-button matStepperNext class="float-end">Next</button>
+            <button mat-raised-button matStepperNext class="float-end">Next</button>
           </div>
         </form>
       </mat-step>
@@ -60,17 +67,18 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Enter Job Description</h5>
+                <br>
                 <!-- Job Description Text Area -->
                 <div class="form-group">
-                  <textarea id="jobDescription" formControlName="jobDescription" class="form-control" rows="15" placeholder="Enter job description here..."></textarea>
+                  <textarea id="jobDescription" formControlName="jobDescription" class="form-control jd-area" rows="10" placeholder="Enter job description here..."></textarea>
                 </div>
               </div>
             </div>
           </div>
           <br><br><br>
           <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext class="float-end">Next</button>
+            <button mat-raised-button matStepperPrevious>Back</button>
+            <button mat-raised-button matStepperNext class="float-end">Next</button>
           </div>
         </form>
       </mat-step>
@@ -82,8 +90,9 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Enter Behavioral Values</h5>
-              <form>
-                <mat-form-field class="example-chip-list">
+              <br>
+              <form >
+                <mat-form-field class="example-chip-list" style="width : 100%">
                   <mat-chip-grid #chipGrid aria-label="Fruit selection">
                     <mat-chip-row *ngFor="let fruit of fruits()" (removed)="remove(fruit)">
                       {{fruit}}
@@ -110,10 +119,11 @@
             </div>
           </div>
         </div>
+        <br><br>
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="stepper.reset()">Reset</button>
-          <button mat-button (click)="submit()">Submit</button>
+          <button mat-raised-button matStepperPrevious>Back</button>
+          <button mat-raised-button (click)="stepper.reset()">Reset</button>
+          <button mat-raised-button class="float-end" (click)="submit()">Submit</button>
         </div>
       </mat-step>
     </mat-stepper>

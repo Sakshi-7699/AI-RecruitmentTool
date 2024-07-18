@@ -13,11 +13,17 @@
 $front-end-theme: mat.define-theme((
   color: (
     theme-type: light,
-    primary: mat.$azure-palette,
+    
+    primary: mat.$chartreuse-palette ,
+    
     tertiary: mat.$blue-palette,
   ),
   density: (
-    scale: 0,
+    scale: -2,
+  ),
+  typography: (
+    brand-family: 'Comic Sans',
+    bold-weight: 900
   )
 ));
 
@@ -34,3 +40,5 @@ $front-end-theme: mat.define-theme((
 
 // Comment out the line below if you want to use the deprecated `color` inputs.
 // @include mat.color-variants-backwards-compatibility($front-end-theme);
+
+
