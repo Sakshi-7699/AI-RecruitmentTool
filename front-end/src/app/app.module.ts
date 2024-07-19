@@ -20,6 +20,7 @@ import { AlgoResponseService } from './services/algo-response.service';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
@@ -50,6 +51,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     MatAutocompleteModule,
     BrowserAnimationsModule,
     MatStepperModule,
+    MatProgressBarModule
   ],
   providers: [
     provideAnimationsAsync(),

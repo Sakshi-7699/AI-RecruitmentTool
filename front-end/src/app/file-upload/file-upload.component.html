@@ -131,11 +131,38 @@
 </div>
 
 
-{{ cover_letter_summary }}
+<br><br>
+<hr>
+<br><br>
+
+<div class="container-md">
+  <div class="row">
+    <div class="col-4">
 
 
-<ul>
-  <li *ngFor="let item of behavioral_scores | keyvalue">
-    <strong>{{ item.key }}:</strong> {{ item.value }}
-  </li>
-</ul>
+
+    </div>
+
+
+    <div class="col-8">
+
+
+      <mat-card>{{ cover_letter_summary }}</mat-card>
+
+
+      <ul>
+        <li *ngFor="let item of behavioral_scores | keyvalue">
+          <strong>{{ item.key }}</strong> 
+          <strong class="float-end"> {{ item.value }} </strong>
+          <mat-progress-bar mode="determinate" [value]="item.value"></mat-progress-bar>
+
+          
+        </li>
+      </ul>
+
+
+    </div>
+  </div>
+</div>
+
+
