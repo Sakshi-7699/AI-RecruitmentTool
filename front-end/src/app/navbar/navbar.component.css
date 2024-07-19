@@ -1,0 +1,14 @@
+.custom-link {
+    color: green;
+    transition: background-color 0.3s;
+  }
+  
+  .custom-link:hover {
+    background-color: rgba(0, 128, 0, 0.1); /* Slight green background on hover */
+  }
+  
+  .active-link {
+    background-color: green;
+    color: white !important;
+  }
+  

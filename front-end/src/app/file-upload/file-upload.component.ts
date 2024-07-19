@@ -142,6 +142,7 @@ export class FileUploadComponent implements OnInit {
 
   cover_letter_summary : string = ""
   behavioral_scores : { [key: string]: number; } = {}
+  resume_match_score : number = 0
   submit(): void {
     const formData = {
       resume: this.convertToBinary(this.resumeFiles[0]),
@@ -155,7 +156,7 @@ export class FileUploadComponent implements OnInit {
       console.log('Form submitted successfully', response);
       this.cover_letter_summary = response['cover_letter_summary'];
       this.behavioral_scores = response['behavioral_scores'];
-      console.log(this.behavioral_scores);
+      this.resume_match_score = response['resume_match_score'];
     }, error => {
       console.error('Form submission error', error);
     });

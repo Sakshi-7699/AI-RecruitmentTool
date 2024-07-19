@@ -69,8 +69,8 @@ async def upload_file(
     behavioral_values_list = eval(behavioral_values[0])
 
     # Print details for logging
-    print(f"Job Description: {job_description}")
-    print(f"Behavioral Values: {behavioral_values_list}")
+    # print(f"Job Description: {job_description}")
+    # print(f"Behavioral Values: {behavioral_values_list}")
 
     # Ensure generate_summary is awaited if it's async
     algo = algorithms.Algorithms()
@@ -78,9 +78,12 @@ async def upload_file(
     summary = algo.generate_summary(cover_letter_preprocessed)
 
     behavioral_scores = algo.get_behavioural_scores(cover_letter_preprocessed,behavioral_values_list)
-
-    return {"cover_letter_summary": summary,
-            "behavioral_scores" : behavioral_scores}
+    resume_match = algo.count_vectorizer(resume_location, job_description)
+    return {
+            "cover_letter_summary": summary,
+            "behavioral_scores" : behavioral_scores,
+            "resume_match_score" : resume_match
+            }
 
 @app.post('/summarize')
 async def generate_summary(cover_letter : UploadFile = File(...)):

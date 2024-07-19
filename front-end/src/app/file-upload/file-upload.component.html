@@ -139,27 +139,50 @@
   <div class="row">
     <div class="col-4">
 
+      <mat-spinner mode="determinate" [value]="resume_match_score"></mat-spinner>
 
-
+    
     </div>
 
 
     <div class="col-8">
 
 
-      <mat-card>{{ cover_letter_summary }}</mat-card>
+      <div class="card">
+        <div class="card-header">
+          Cover Letter Summary
+        </div>
+        <div class="card-body">
+          <!-- <h5 class="card-title">Special title treatment</h5> -->
+          <p class="card-text">
 
+            {{ cover_letter_summary }}
 
-      <ul>
-        <li *ngFor="let item of behavioral_scores | keyvalue">
-          <strong>{{ item.key }}</strong> 
-          <strong class="float-end"> {{ item.value }} </strong>
-          <mat-progress-bar mode="determinate" [value]="item.value"></mat-progress-bar>
+          </p>
+          <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+        </div>
+      </div>
 
-          
-        </li>
-      </ul>
+      
+      <br><br>
 
+      <div class="card">
+        <div class="card-body">
+
+          <ul>
+            <li *ngFor="let item of behavioral_scores | keyvalue">
+              <strong>{{ item.key }}</strong> 
+              <strong class="float-end"> {{ item.value }} </strong>
+              <mat-progress-bar mode="determinate" [value]="item.value"></mat-progress-bar>
+    
+              
+            </li>
+          </ul>
+
+        </div>
+      </div>
+
+      
 
     </div>
   </div>

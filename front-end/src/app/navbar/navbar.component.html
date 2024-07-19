@@ -1,8 +1,17 @@
-<nav class=" shadow navbar navbar-dark bg-dark">
-    <div class="container-fluid">
-      <span class="navbar-brand mb-0 h1 text-center">AI-Recruitment</span>
-    </div>
+<nav class="shadow navbar navbar-dark bg-dark">
+  <div class="container-md">
+    <span class="navbar-brand mb-0 h1 text-center">AI-Recruitment</span>
+    <ul class="nav justify-content-end">
+      <li class="nav-item">
+        <a class="nav-link custom-link" routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" aria-current="page">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link custom-link" routerLink="/candidate-compatibility-check" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Compatibility Check</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link custom-link" routerLink="/analysis" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Analysis</a>
+      </li>
+    </ul>
+  </div>
 </nav>
-
-
-  
+<router-outlet></router-outlet>

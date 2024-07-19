@@ -20,14 +20,16 @@ class Algorithms:
         print(f'Match Percentage is: {MatchPercentage:.2f}')
         return round(MatchPercentage,2)
     
-    def count_vectorizer(self) : 
+    def count_vectorizer(self,resume, job_description) : 
+        resume = helper.get_preprocessed_text(resume)
+        job_description = helper.preprocess_text(job_description)
         vectorizer = CountVectorizer()
-        count_matrix=vectorizer.fit_transform([self.resume,self.job_description])
+        count_matrix=vectorizer.fit_transform([resume, job_description])
         return self.get_match_percentage(count_matrix)
     
-    def tfidf_vectorizer(self) :
+    def tfidf_vectorizer(self,resume, job_description) :
         vectorizer = TfidfVectorizer()
-        count_matrix=vectorizer.fit_transform([self.resume,self.job_description])
+        count_matrix=vectorizer.fit_transform([resume, job_description])
         return self.get_match_percentage(count_matrix)
     
     def generate_summary(self,document):
