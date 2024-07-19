@@ -1,12 +1,13 @@
 from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
 from typing import List
 import shutil
 import os
 import uvicorn
 import algorithms
 import json
+import helper
+from datetime import datetime
 
 
 app = FastAPI()
@@ -36,35 +37,57 @@ def run_count_vectorizer():
 async def upload_file(   
     resume: UploadFile = File(...),
     cover_letter: UploadFile = File(...),
-    job_description: str = Form(...) ,
+    job_description: str = Form(...),
     behavioral_values: List[str] = Form(...)
 ):
+    
+
+    # Define upload folder
     upload_folder = "data/"
     os.makedirs(upload_folder, exist_ok=True)
+    
+    # Generate unique suffix for file names
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    
+    # Set fixed names with unique suffix
+    resume_filename = f"resume_{timestamp}.pdf"
+    cover_letter_filename = f"cover_letter_{timestamp}.pdf"
 
-    resume_location = f"{upload_folder}{resume.filename}"
-    cover_letter_location = f"{upload_folder}{cover_letter.filename}"
-
+    resume_location = os.path.join(upload_folder, resume_filename)
+    cover_letter_location = os.path.join(upload_folder, cover_letter_filename)
+    
+    cover_letter.filename = cover_letter_filename
+    resume.filename = resume_filename
+    # Save resume file
     with open(resume_location, "wb") as buffer:
         shutil.copyfileobj(resume.file, buffer)
     
+    # Save cover letter file
     with open(cover_letter_location, "wb") as buffer:
         shutil.copyfileobj(cover_letter.file, buffer)
 
-    # Process behavioral values, which are sent as a JSON string
+    # Process behavioral values
     behavioral_values_list = behavioral_values
 
-    # Further processing can be done here
+    # Print details for logging
     print(f"Job Description: {job_description}")
     print(f"Behavioral Values: {behavioral_values_list}")
 
-    return {"message": "Files uploaded successfully"}
+    # Ensure generate_summary is awaited if it's async
+    algo = algorithms.Algorithms()
+    cover_letter_preprocessed = helper.get_preprocessed_text(cover_letter_location)
+    summary = algo.generate_summary(cover_letter_preprocessed)
 
-@app.get('/summarize')
-async def generate_summary():
-    data = "dummy data"
+
+
+    return {"cover_letter_summary": summary}
+
+@app.post('/summarize')
+async def generate_summary(cover_letter : UploadFile = File(...)):
+    data = helper.get_preprocessed_text(cover_letter)
     algo = algorithms.Algorithms()
     result = algo.generate_summary(data)
+    print(result)
     return result
 
 if __name__ == "__main__":

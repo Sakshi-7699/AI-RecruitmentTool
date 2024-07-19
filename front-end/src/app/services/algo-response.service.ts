@@ -26,14 +26,6 @@ export class AlgoResponseService {
     'Content-Type': 'application/json',  // Assuming the backend expects JSON
   });
 
-  // uploadFiles(formData: any): Observable<any> {
-  //   console.log('data received : ',formData)
-  //   return this.http.post(this.rootUrl + 'upload', formData, { headers : new HttpHeaders({
-  //     'Content-Type': 'application/json',  // Assuming the backend expects JSON
-  //   })  })
-  // }
-
-
   uploadFiles(
     resume: File,
     coverLetter: File,

@@ -10,8 +10,7 @@ API = {
 
 
 class Algorithms:
-    def __init__(self,resume=None, job_description=None) -> None:
-        self.job_description ,self.resume = helper.get_resume_and_jd_preprocessed(resume=resume, jd=job_description)
+    def __init__(self) -> None:
         self.headers = {"Authorization": "Bearer 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"}
         
 

@@ -140,8 +140,7 @@ export class FileUploadComponent implements OnInit {
     return reader
   }
 
-  
-
+  cover_letter_summary : string = ""
   submit(): void {
     const formData = {
       resume: this.convertToBinary(this.resumeFiles[0]),
@@ -153,6 +152,7 @@ export class FileUploadComponent implements OnInit {
       this.secondFormGroup.value.jobDescription,
       this.fruits()).subscribe(response => {
       console.log('Form submitted successfully', response);
+      this.cover_letter_summary = response['cover_letter_summary']
     }, error => {
       console.error('Form submission error', error);
     });
