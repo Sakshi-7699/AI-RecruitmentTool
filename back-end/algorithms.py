@@ -36,8 +36,7 @@ class Algorithms:
         response = requests.post(API_URL, headers=self.headers, json={ "inputs": document})
         return response.json()[0]['summary_text']
     
-    def get_behavioural_scores(self, document,behavioural_list):
-        print(behavioural_list)                
+    def get_behavioural_scores(self, document,behavioural_list : list):
         API_URL = API['BEHAVIOURAL']
         payload = {
             "inputs": document,
@@ -46,8 +45,11 @@ class Algorithms:
             }
         }
         response = requests.post(API_URL, headers=self.headers, json=payload)
-        print(response.json()['scores'])
-        return response.json()
+        scores = response.json()['scores']
+        result = {}
+        for b,s in zip(behavioural_list, scores):
+            result[b] = round(s * 100, 2)
+        return result
 
 
         

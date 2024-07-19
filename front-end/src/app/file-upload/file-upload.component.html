@@ -41,14 +41,14 @@
                       <input type="file" (change)="onFileSelected($event, 'coverLetter')" hidden #coverLetterInput>
                     </div>
                     <br>
-                    <button mat-raised-button (click)="coverLetterInput.click()">Choose Cover Letter</button>
+                    <button mat-raised-button color="accent" (click)="coverLetterInput.click()">Choose Cover Letter</button>
                     <ul class="list-group mt-3">
                       <li class="list-group-item" *ngFor="let file of coverLetterFiles">{{ file.name }}</li>
                     </ul>
                   </div>
                 </div>
                 <br><br><br>
-                <button mat-raised-button (click)="onUpload()" [disabled]="!resumeFiles.length || !coverLetterFiles.length">Upload</button>
+                <!-- <button mat-raised-button (click)="onUpload()" [disabled]="!resumeFiles.length || !coverLetterFiles.length">Upload</button> -->
               </div>
             </div>
           </div>
@@ -132,3 +132,10 @@
 
 
 {{ cover_letter_summary }}
+
+
+<ul>
+  <li *ngFor="let item of behavioral_scores | keyvalue">
+    <strong>{{ item.key }}:</strong> {{ item.value }}
+  </li>
+</ul>

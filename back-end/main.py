@@ -66,7 +66,7 @@ async def upload_file(
         shutil.copyfileobj(cover_letter.file, buffer)
 
     # Process behavioral values
-    behavioral_values_list = behavioral_values[0]
+    behavioral_values_list = eval(behavioral_values[0])
 
     # Print details for logging
     print(f"Job Description: {job_description}")
