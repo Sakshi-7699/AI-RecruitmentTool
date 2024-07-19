@@ -41,7 +41,6 @@ async def upload_file(
     behavioral_values: List[str] = Form(...)
 ):
     
-
     # Define upload folder
     upload_folder = "data/"
     os.makedirs(upload_folder, exist_ok=True)
@@ -67,7 +66,7 @@ async def upload_file(
         shutil.copyfileobj(cover_letter.file, buffer)
 
     # Process behavioral values
-    behavioral_values_list = behavioral_values
+    behavioral_values_list = behavioral_values[0]
 
     # Print details for logging
     print(f"Job Description: {job_description}")
@@ -78,9 +77,10 @@ async def upload_file(
     cover_letter_preprocessed = helper.get_preprocessed_text(cover_letter_location)
     summary = algo.generate_summary(cover_letter_preprocessed)
 
+    behavioral_scores = algo.get_behavioural_scores(cover_letter_preprocessed,behavioral_values_list)
 
-
-    return {"cover_letter_summary": summary}
+    return {"cover_letter_summary": summary,
+            "behavioral_scores" : behavioral_scores}
 
 @app.post('/summarize')
 async def generate_summary(cover_letter : UploadFile = File(...)):

@@ -5,7 +5,8 @@ import requests
 
 
 API = {
-    'SUMMARY' : "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"
+    'SUMMARY' : "https://api-inference.huggingface.co/models/facebook/bart-large-cnn",
+    'BEHAVIOURAL' : "https://api-inference.huggingface.co/models/facebook/bart-large-mnli"
 }
 
 
@@ -34,5 +35,19 @@ class Algorithms:
         API_URL = API['SUMMARY']
         response = requests.post(API_URL, headers=self.headers, json={ "inputs": document})
         return response.json()[0]['summary_text']
+    
+    def get_behavioural_scores(self, document,behavioural_list):
+        print(behavioural_list)                
+        API_URL = API['BEHAVIOURAL']
+        payload = {
+            "inputs": document,
+            "parameters": {
+                "candidate_labels": behavioural_list,
+            }
+        }
+        response = requests.post(API_URL, headers=self.headers, json=payload)
+        print(response.json()['scores'])
+        return response.json()
+
 
         
