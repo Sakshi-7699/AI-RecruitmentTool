@@ -135,7 +135,14 @@
 <hr>
 <br><br>
 
-<div class="container-md">
+<!-- Spinner section -->
+<div class="text-center spinner-overlay" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+  
+</div>
+
+
+<div *ngIf="isResponseReceived"  class="container-md">  
   <div class="row">
     <div class="col-4">
 

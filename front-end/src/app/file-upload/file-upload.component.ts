@@ -89,23 +89,6 @@ export class FileUploadComponent implements OnInit {
     }
   }
 
-  onUpload(): void {
-    if (this.resumeFiles.length && this.coverLetterFiles.length) {
-      const formData = new FormData();
-      this.resumeFiles.forEach(file => formData.append('resume', file));
-      this.coverLetterFiles.forEach(file => formData.append('cover_letter', file));
-      formData.append('job_description', this.secondFormGroup.value.jobDescription);
-      formData.append('behavioral_values', JSON.stringify(this.fruits()));
-  
-      // this.algoservice.uploadFiles(formData).subscribe(response => {
-      //   console.log('Form submitted successfully', response);
-      // }, error => {
-      //   console.error('Form submission error', error);
-      // });
-    } else {
-      console.error('Both resume and cover letter must be selected');
-    }
-  }
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
@@ -143,7 +126,12 @@ export class FileUploadComponent implements OnInit {
   cover_letter_summary : string = ""
   behavioral_scores : { [key: string]: number; } = {}
   resume_match_score : number = 0
+  isResponseReceived : boolean = false
+  loading: boolean = false; 
+  
+
   submit(): void {
+    this.loading = true;
     const formData = {
       resume: this.convertToBinary(this.resumeFiles[0]),
       cover_letter: this.convertToBinary(this.coverLetterFiles[0]),
@@ -153,12 +141,21 @@ export class FileUploadComponent implements OnInit {
     this.algoservice.uploadFiles(this.resumeFiles[0], this.coverLetterFiles[0], 
       this.secondFormGroup.value.jobDescription,
       this.fruits()).subscribe(response => {
+      
+      this.loading = false;
       console.log('Form submitted successfully', response);
       this.cover_letter_summary = response['cover_letter_summary'];
       this.behavioral_scores = response['behavioral_scores'];
       this.resume_match_score = response['resume_match_score'];
+      this.isResponseReceived = true; 
+      
     }, error => {
+      this.loading = false;
       console.error('Form submission error', error);
     });
   }
+
+  
+
+  
 }
