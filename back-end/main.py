@@ -8,7 +8,11 @@ import algorithms
 import json
 import helper
 from datetime import datetime
-
+from fastapi import FastAPI, File, UploadFile, Form
+from motor.motor_asyncio import AsyncIOMotorClient
+from pydantic import BaseModel
+from typing import List
+import base64
 
 app = FastAPI()
 
@@ -92,6 +96,41 @@ async def generate_summary(cover_letter : UploadFile = File(...)):
     result = algo.generate_summary(data)
     print(result)
     return result
+
+# MongoDB connection
+client = AsyncIOMotorClient('mongodb+srv://sakshi:NQD0MEmPWLj4tZwj@cluster0.8f27dcp.mongodb.net/')
+db = client['AI-RECRUITMENT']
+collection = db['CANDIDATES']
+
+class Candidate(BaseModel):
+    name: str
+    resume: str  # Store as base64-encoded string
+    cover_letter: str  # Store as base64-encoded string
+
+@app.post("/add-candidate")
+async def upload_candidate(
+    name: str = Form(...),
+    resume: UploadFile = File(...),
+    cover_letter: UploadFile = File(...)
+):
+    resume_content = await resume.read()
+    cover_letter_content = await cover_letter.read()
+
+    resume_base64 = base64.b64encode(resume_content).decode('utf-8')
+    cover_letter_base64 = base64.b64encode(cover_letter_content).decode('utf-8')
+
+    candidate = Candidate(name=name, resume=resume_base64, cover_letter=cover_letter_base64)
+    result = await collection.insert_one(candidate.dict())
+
+    return {"message": "Candidate uploaded successfully", "candidate_id": str(result.inserted_id)}
+
+@app.get("/candidates/", response_model=List[Candidate])
+async def get_candidates():
+    candidates = []
+    async for candidate in collection.find():
+        candidates.append(Candidate(**candidate))
+    return candidates
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="127.0.0.1", port=8000)

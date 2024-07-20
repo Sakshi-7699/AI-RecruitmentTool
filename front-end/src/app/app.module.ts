@@ -22,9 +22,12 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTableModule} from '@angular/material/table';
+
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { AnalysisComponent } from './analysis/analysis.component';
 
 
 
@@ -35,7 +38,8 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     NavbarComponent,
     FileUploadComponent,
     HomeComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    AnalysisComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,8 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     BrowserAnimationsModule,
     MatStepperModule,
     MatProgressBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTableModule
   ],
   providers: [
     provideAnimationsAsync(),
