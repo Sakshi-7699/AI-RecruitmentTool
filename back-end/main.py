@@ -72,17 +72,15 @@ async def upload_file(
     # Process behavioral values
     behavioral_values_list = eval(behavioral_values[0])
 
-    # Print details for logging
-    # print(f"Job Description: {job_description}")
-    # print(f"Behavioral Values: {behavioral_values_list}")
-
-    # Ensure generate_summary is awaited if it's async
     algo = algorithms.Algorithms()
     cover_letter_preprocessed = helper.get_preprocessed_text(cover_letter_location)
     summary = algo.generate_summary(cover_letter_preprocessed)
 
     behavioral_scores = algo.get_behavioural_scores(cover_letter_preprocessed,behavioral_values_list)
     resume_match = algo.count_vectorizer(resume_location, job_description)
+
+    os.remove(resume_location)
+    os.remove(cover_letter_location)
     return {
             "cover_letter_summary": summary,
             "behavioral_scores" : behavioral_scores,

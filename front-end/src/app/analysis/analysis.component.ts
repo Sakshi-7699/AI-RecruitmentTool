@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 interface Candidate {
   name: string;
@@ -15,12 +16,13 @@ interface Candidate {
   templateUrl: './analysis.component.html',
   styleUrls: ['./analysis.component.css']
 })
-export class AnalysisComponent implements OnInit {
+export class AnalysisComponent implements OnInit, AfterViewInit {
   secondFormGroup: FormGroup;
   displayedColumns: string[] = ['name', 'resume', 'cover_letter'];
   dataSource = new MatTableDataSource<Candidate>([]);
 
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private _formBuilder: FormBuilder, private http: HttpClient) {
     this.secondFormGroup = this._formBuilder.group({
@@ -30,7 +32,11 @@ export class AnalysisComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCandidates();
+  }
+
+  ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   getCandidates(): void {
@@ -45,11 +51,15 @@ export class AnalysisComponent implements OnInit {
   }
 
   applyFilter(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.dataSource.filter = input.value.trim().toLowerCase();
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
-  onSubmit(): void {
+  submit(): void {
     // Handle form submission logic here
   }
 }
