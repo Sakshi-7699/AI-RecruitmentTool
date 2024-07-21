@@ -130,10 +130,10 @@ async def get_candidates():
     return candidates
 
 @app.post("/auth/login")
-async def login(username: str ='', password: str =''):
+async def login(credentials : dict):
     # Implement login logic here
     
-    return {"token": "plokijuh"}
+    return {"token": credentials["username"]}
 
 
 

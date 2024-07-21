@@ -9,11 +9,14 @@ export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false);
   isLoggedIn = this.loggedIn.asObservable();
 
-  login() {
+  login(token: string): void {
+    localStorage.setItem('token', token);
     this.loggedIn.next(true);
   }
 
-  logout() {
+
+  logout(): void {
+    localStorage.removeItem('token');
     this.loggedIn.next(false);
   }
 }

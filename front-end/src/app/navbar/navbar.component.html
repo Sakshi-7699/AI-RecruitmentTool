@@ -11,6 +11,14 @@
       <li class="nav-item">
         <a class="nav-link custom-link" routerLink="/analysis" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Analysis</a>
       </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link custom-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Welcome, {{ username }}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" (click)="onLogout()">Logout</a></li>
+        </ul>
+      </li>
     </ul>
   </div>
 </nav>

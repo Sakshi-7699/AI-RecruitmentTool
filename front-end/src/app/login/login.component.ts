@@ -27,15 +27,15 @@ export class LoginComponent implements OnInit {
 
   onLogin(): void {
     if (this.loginForm.valid) {
-      this.authService.login();
+      
 
 
       const credentials = this.loginForm.value;
-      const username = credentials.username;
-      const pwd = credentials.password;
-      this.http.post('http://localhost:8000/auth/login', username,pwd).subscribe(
+     
+      this.http.post('http://localhost:8000/auth/login', credentials).subscribe(
         (response: any) => {
           localStorage.setItem('token', response.token);
+          this.authService.login(response.token);
           this.router.navigate(['/']);
         },
         error => {
