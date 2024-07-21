@@ -1,0 +1,26 @@
+/* login.component.css */
+.container-md {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .card {
+    width: 400px;
+  }
+  
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  button {
+    margin-top: 1rem;
+  }
+  

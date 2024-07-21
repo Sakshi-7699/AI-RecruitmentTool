@@ -33,6 +33,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { AnalysisComponent } from './analysis/analysis.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -44,7 +45,8 @@ import { AnalysisComponent } from './analysis/analysis.component';
     FileUploadComponent,
     HomeComponent,
     PagenotfoundComponent,
-    AnalysisComponent
+    AnalysisComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

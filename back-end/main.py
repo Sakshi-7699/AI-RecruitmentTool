@@ -129,6 +129,13 @@ async def get_candidates():
         candidates.append(Candidate(**candidate))
     return candidates
 
+@app.post("/auth/login")
+async def login(username: str ='', password: str =''):
+    # Implement login logic here
+    
+    return {"token": "plokijuh"}
+
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="127.0.0.1", port=8000)
