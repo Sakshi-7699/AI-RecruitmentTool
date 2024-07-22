@@ -1,6 +1,7 @@
 <nav class="shadow navbar navbar-dark bg-dark">
   <div class="container-md">
-    <span class="navbar-brand mb-0 h1 text-center">AI-Recruitment</span>
+    <span class="navbar-brand mb-0 h1 text-center">
+      <a routerLink="/" style="color: greenyellow;" class="navbar-brand mb-0 h1 text-center">Ai-R</a></span>
     <ul class="nav justify-content-end" *ngIf="showTabs">
       <li class="nav-item">
         <a class="nav-link custom-link" routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }" aria-current="page">Home</a>
@@ -13,7 +14,7 @@
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link custom-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Welcome, {{ username }}
+          Welcome {{ username }}
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
           <li><a class="dropdown-item" (click)="onLogout()">Logout</a></li>

@@ -1,0 +1,22 @@
+.jumbotron {
+    background-color: black;
+    color: white;
+    padding: 2rem 1rem;
+  }
+  
+  .card {
+    margin-bottom: 1rem;
+  }
+  
+  .mt-5 {
+    margin-top: 3rem !important;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+
+  .highlight {
+    color: greenyellow; 
+  }
+  
