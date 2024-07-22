@@ -24,14 +24,29 @@
     <h2>How It Works</h2>
     <div class="row text-center">
       <div class="col-md-3" *ngFor="let step of steps; let i = index">
-        <mat-icon class="step-icon">{{ step.icon }}</mat-icon>
-        <h4 style="color:#477d3b; ;">Step {{ i + 1 }}</h4>
+        <mat-icon class="step-icon" color="primary">{{ step.icon }}</mat-icon>
+        <h4 style="color: green;">Step {{ i + 1 }}</h4>
         <p>{{ step.description }}</p>
       </div>
     </div>
   </div>
 
-  <div class="mt-5 jumbotron">
+  <!-- New Section for Screenshots and Explanations -->
+  <div class="mt-5">
+    <h2>Our Features</h2>
+    <div class="row align-items-center">
+      <div class="col-md-6 text-center">
+        <img src="../../assets/ccc.png" alt="Analysis Page Screenshot" class="img-fluid feature-screenshot">
+        <p class="screenshot-description">This is the analysis page where you can analyze candidate data and behavioral values.</p>
+      </div>
+      <div class="col-md-6 text-center">
+        <img src="../../assets/ccc.png" alt="Compatibility Check Page Screenshot" class="img-fluid feature-screenshot">
+        <p class="screenshot-description">This is the compatibility check page where you can compare multiple candidates.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="jumbotron mt-5">
     <h2>Contact Us</h2>
     <form>
       <div class="form-group">
@@ -42,7 +57,8 @@
         <label for="contactMessage">Message</label>
         <textarea class="form-control" id="contactMessage" rows="3"></textarea>
       </div>
-      <button mat-raised-button color="primary">Login</button>
+      <button mat-raised-button color="primary">Submit</button>
     </form>
   </div>
 </div>
+
