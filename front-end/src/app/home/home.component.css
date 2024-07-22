@@ -1,13 +1,16 @@
 /* home.component.css */
+body{
+  background-color: #000000;
+}
 .container-md {
   margin-top: 3rem;
 }
 
 .jumbotron {
-  background-color: #000000;
+  color: white;
   padding: 2rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  color: #fff;
+  background-color: black
 }
 
 .text-center {
