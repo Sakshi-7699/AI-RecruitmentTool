@@ -1,5 +1,4 @@
-
-
+<!-- home.component.html -->
 <div shadow class="container-md">
   <div class="jumbotron text-center mt-5">
     <h1>Welcome to <span class="highlight">Ai-R</span>ecruitment</h1>
@@ -10,56 +9,29 @@
   </div>
 
   <div class="row mt-5">
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Feature 1</h5>
-          <p class="card-text">Brief description of the feature.</p>
+    <div class="col-md-4" *ngFor="let feature of features">
+      <div class="card feature-card">
+        <div class="card-body text-center">
+          <mat-icon class="feature-icon">{{ feature.icon }}</mat-icon>
+          <h5 class="card-title">{{ feature.title }}</h5>
+          <p class="card-text">{{ feature.description }}</p>
         </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Feature 2</h5>
-          <p class="card-text">Brief description of the feature.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Feature 3</h5>
-          <p class="card-text">Brief description of the feature.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="mt-5">
-    <h2>How It Works</h2>
-    <div class="row">
-      <div class="col-md-3">
-        <h4>Step 1</h4>
-        <p>Register an account and fill out your profile.</p>
-      </div>
-      <div class="col-md-3">
-        <h4>Step 2</h4>
-        <p>Upload job descriptions and candidate resumes.</p>
-      </div>
-      <div class="col-md-3">
-        <h4>Step 3</h4>
-        <p>Use AI to match candidates to job descriptions.</p>
-      </div>
-      <div class="col-md-3">
-        <h4>Step 4</h4>
-        <p>Review and hire the best candidates.</p>
       </div>
     </div>
   </div>
 
   <div class="mt-5">
+    <h2>How It Works</h2>
+    <div class="row text-center">
+      <div class="col-md-3" *ngFor="let step of steps; let i = index">
+        <mat-icon class="step-icon">{{ step.icon }}</mat-icon>
+        <h4 style="color:#477d3b; ;">Step {{ i + 1 }}</h4>
+        <p>{{ step.description }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5 jumbotron">
     <h2>Contact Us</h2>
     <form>
       <div class="form-group">
@@ -70,7 +42,7 @@
         <label for="contactMessage">Message</label>
         <textarea class="form-control" id="contactMessage" rows="3"></textarea>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button mat-raised-button color="primary">Login</button>
     </form>
   </div>
 </div>

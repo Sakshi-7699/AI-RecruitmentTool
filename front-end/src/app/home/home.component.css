@@ -1,22 +1,63 @@
-.jumbotron {
-    background-color: black;
-    color: white;
-    padding: 2rem 1rem;
-  }
-  
-  .card {
-    margin-bottom: 1rem;
-  }
-  
-  .mt-5 {
-    margin-top: 3rem !important;
-  }
-  
-  .text-center {
-    text-align: center;
-  }
+/* home.component.css */
+.container-md {
+  margin-top: 3rem;
+}
 
-  .highlight {
-    color: greenyellow; 
+.jumbotron {
+  background-color: #000000;
+  color: white;
+  padding: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-5 {
+  margin-top: 3rem !important;
+}
+
+.card {
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.highlight {
+  background: radial-gradient(circle, #00ff00, #477d3b);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.feature-icon {
+  font-size: 48px;
+  color: #3f51b5;
+  margin-bottom: 10px;
+}
+
+.feature-card .card-title{
+  color: #477d3b;
+
+}
+.step-icon {
+  font-size: 36px;
+  color: #4caf50;
+  margin-bottom: 10px;
+}
+
+button {
+  margin-top: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container-md {
+    margin-top: 1rem;
   }
-  
+}
