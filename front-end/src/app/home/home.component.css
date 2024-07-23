@@ -10,7 +10,9 @@ body{
   color: white;
   padding: 2rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: black
+  background-color: black;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+
 }
 
 .text-center {
@@ -80,3 +82,4 @@ button {
     margin-top: 1rem;
   }
 }
+

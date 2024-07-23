@@ -1,11 +1,41 @@
 // home.component.ts
 import { Component, OnInit } from '@angular/core';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [
+    trigger('jumbotronAnimation', [
+      state('in', style({
+        opacity: 1,
+        transform: 'translateY(0)'
+      })),
+      transition('void => *', [
+        style({
+          opacity: 0,
+          transform: 'translateY(-100%)'
+        }),
+        animate('0.5s ease-out')
+      ])
+    ]),
+    trigger('contentAnimation', [
+      state('in', style({
+        opacity: 1,
+        transform: 'translateY(0)'
+      })),
+      transition('void => *', [
+        style({
+          opacity: 0,
+          transform: 'translateY(100%)'
+        }),
+        animate('0.5s 0.5s ease-out')
+      ])
+    ])
+  ]
 })
+
 export class HomeComponent implements OnInit {
 
   features = [
