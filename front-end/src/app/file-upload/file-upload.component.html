@@ -1,16 +1,10 @@
+<!-- profile.component.html -->
 <div class="container-md">
   <div class="row">
-    
-
     <br><br>
-  <h1 class="text-center">Candidate Compatibility Checker</h1>
-
-  <br><br><br>
-
-
+    <h1 class="text-center">Candidate Compatibility Checker</h1>
+    <br><br><br>
     <mat-stepper orientation="horizontal" #stepper>
-
-      
       <!-- Step 1: Candidate Data -->
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
@@ -93,7 +87,7 @@
             <div class="card-body">
               <h5 class="card-title">Enter Behavioral Values</h5>
               <br>
-              <form >
+              <form>
                 <mat-form-field class="example-chip-list" style="width : 100%">
                   <mat-chip-grid #chipGrid aria-label="Fruit selection">
                     <mat-chip-row *ngFor="let fruit of fruits()" (removed)="remove(fruit)">
@@ -131,32 +125,19 @@
     </mat-stepper>
   </div>
 </div>
-
-
 <br><br>
 <hr>
 <br><br>
-
 <!-- Spinner section -->
 <div class="text-center spinner-overlay" *ngIf="loading">
   <mat-spinner></mat-spinner>
-  
 </div>
-
-
-<div *ngIf="isResponseReceived"  class="container-md">  
+<div *ngIf="isResponseReceived" class="container-md">
   <div class="row">
     <div class="col-4">
-
       <mat-spinner mode="determinate" [value]="resume_match_score"></mat-spinner>
-
-    
     </div>
-
-
     <div class="col-8">
-
-
       <div class="card">
         <div class="card-header">
           Cover Letter Summary
@@ -164,37 +145,23 @@
         <div class="card-body">
           <!-- <h5 class="card-title">Special title treatment</h5> -->
           <p class="card-text">
-
             {{ cover_letter_summary }}
-
           </p>
           <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
         </div>
       </div>
-
-      
       <br><br>
-
       <div class="card">
         <div class="card-body">
-
           <ul>
             <li *ngFor="let item of behavioral_scores | keyvalue">
-              <strong>{{ item.key }}</strong> 
+              <strong>{{ item.key }}</strong>
               <strong class="float-end"> {{ item.value }} </strong>
               <mat-progress-bar mode="determinate" [value]="item.value"></mat-progress-bar>
-    
-              
             </li>
           </ul>
-
         </div>
       </div>
-
-      
-
     </div>
   </div>
 </div>
-
-

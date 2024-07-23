@@ -6,6 +6,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { AnalysisComponent } from './analysis/analysis.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
+import { ProfileComponent } from './profile/profile.component';
 
 export const routes: Routes = [
 
@@ -20,12 +21,17 @@ export const routes: Routes = [
     canActivate: [AuthGuard] 
 },
 { 
-    path: '', 
-    component: HomeComponent 
+    path: 'profile', 
+    component: ProfileComponent ,
+    canActivate: [AuthGuard]
 },
 { 
     path: 'user-login', 
     component: LoginComponent 
+},
+{ 
+    path: '', 
+    component: HomeComponent 
 },
 { 
     path: '**', 

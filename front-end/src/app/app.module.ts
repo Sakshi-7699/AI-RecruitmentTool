@@ -34,6 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { AnalysisComponent } from './analysis/analysis.component';
 import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -46,7 +47,8 @@ import { LoginComponent } from './login/login.component';
     HomeComponent,
     PagenotfoundComponent,
     AnalysisComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
