@@ -1,27 +1,38 @@
 <!-- login.component.html -->
 <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
-  <div class="shadow card" style="width: 400px;">
-    <div class="card-body">
-      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-        <h5 class="card-title text-center">Login</h5>
-        <div class="form-group">
-          <mat-form-field appearance="fill" class="w-100">
-            <mat-label>Username</mat-label>
-            <mat-icon matPrefix>person</mat-icon>
-            <input matInput id="username" formControlName="username" placeholder="Username" />
-          </mat-form-field>
+  <div class="row">
+    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center text-white p-5 bg-dark left-panel">
+      <div class="jumbotron text-center mt-5" [@jumbotronAnimation]>
+        <h1>Welcome to <span class="highlight">Ai-R</span>ecruitment</h1>
+        <p>Your AI-powered recruitment solution</p>
+        
+      </div>
+    </div>
+    <div class="col-md-6 d-flex justify-content-center">
+      <div class="shadow card" style="width: 600px;">
+        <div class="card-body">
+          <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+            <h5 class="card-title text-center">Login</h5>
+            <div class="form-group">
+              <mat-form-field appearance="fill" class="w-100">
+                <mat-label>Username</mat-label>
+                <mat-icon matPrefix>person</mat-icon>
+                <input matInput id="username" formControlName="username" placeholder="Username" />
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field appearance="fill" class="w-100">
+                <mat-label>Password</mat-label>
+                <mat-icon matPrefix>lock</mat-icon>
+                <input matInput id="password" formControlName="password" type="password" placeholder="Password" />
+              </mat-form-field>
+            </div>
+            <div class="d-flex justify-content-end">
+              <button mat-raised-button color="primary">Login</button>
+            </div>
+          </form>
         </div>
-        <div class="form-group">
-          <mat-form-field appearance="fill" class="w-100">
-            <mat-label>Password</mat-label>
-            <mat-icon matPrefix>lock</mat-icon>
-            <input matInput id="password" formControlName="password" type="password" placeholder="Password" />
-          </mat-form-field>
-        </div>
-        <div class="d-flex justify-content-end">
-          <button mat-raised-button color="primary">Login</button>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>

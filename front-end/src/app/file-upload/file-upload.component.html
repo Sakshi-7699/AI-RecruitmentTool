@@ -135,7 +135,14 @@
 <div *ngIf="isResponseReceived" class="container-md">
   <div class="row">
     <div class="col-4">
-      <mat-spinner mode="determinate" [value]="resume_match_score"></mat-spinner>
+      <div class="card">
+        <div class="card-header"> Resume to Job Description Match </div>
+        <div class="card-header"> Score: {{ resume_match_score }}</div>
+        <div class="card-body">
+          <mat-spinner mode="determinate" [value]="resume_match_score"></mat-spinner>
+
+        </div>
+      </div>
     </div>
     <div class="col-8">
       <div class="card">

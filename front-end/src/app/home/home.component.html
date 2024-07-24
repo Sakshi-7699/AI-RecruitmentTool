@@ -1,4 +1,4 @@
-<div shadow class="container-md">
+<div shadow class="container-fluid">
   <div class="jumbotron text-center mt-5" [@jumbotronAnimation]>
     <h1>Welcome to <span class="highlight">Ai-R</span>ecruitment</h1>
     <p>Your AI-powered recruitment solution</p>
@@ -23,7 +23,7 @@
     <h2>How It Works</h2>
     <div class="row text-center">
       <div class="col-md-3" *ngFor="let step of steps; let i = index">
-        <mat-icon class="step-icon" color="primary">{{ step.icon }}</mat-icon>
+        <mat-icon class="step-icon shadow" color="primary">{{ step.icon }}</mat-icon>
         <h4 style="color: green;">Step {{ i + 1 }}</h4>
         <p>{{ step.description }}</p>
       </div>

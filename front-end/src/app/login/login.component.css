@@ -23,4 +23,55 @@
   button {
     margin-top: 1rem;
   }
+
+  /* login.component.css */
+  .jumbotron {
+    color: white;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: black;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
   
+  }
+
+/* login.component.css */
+.left-panel {
+  background: radial-gradient(circle, rgba(0, 128, 0, 0.8), rgba(0, 64, 0, 0.9));
+  text-align: center;
+}
+
+.left-panel h1,
+.left-panel p,
+.left-panel mat-icon {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.left-panel .animated-icon {
+  font-size: 48px;
+  margin: 0 10px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+

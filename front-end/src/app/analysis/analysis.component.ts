@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+
 
 interface Candidate {
   name: string;
@@ -14,7 +16,8 @@ interface Candidate {
 @Component({
   selector: 'app-analysis',
   templateUrl: './analysis.component.html',
-  styleUrls: ['./analysis.component.css']
+  styleUrls: ['./analysis.component.css'],
+  
 })
 export class AnalysisComponent implements OnInit, AfterViewInit {
   secondFormGroup: FormGroup;
@@ -62,4 +65,5 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   submit(): void {
     // Handle form submission logic here
   }
+
 }
