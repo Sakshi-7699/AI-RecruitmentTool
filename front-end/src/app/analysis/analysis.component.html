@@ -22,10 +22,18 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Candidate Data</h5>
-            <mat-form-field appearance="fill" style="width: 100%;">
-              <mat-label>Search Candidate</mat-label>
-              <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
-            </mat-form-field>
+            <div class="row">
+              <div class = "col-8">
+                <mat-form-field appearance="fill" style="width: 100%;">
+                  <mat-label>Search Candidate</mat-label>
+                  <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+                </mat-form-field>
+                
+              </div>
+              <div class = "col-4 float-end">
+                  <button mat-raised-button (click)="openExportDialog()" class="float-end">Export Data</button>
+              </div>
+            </div>
             
             <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
               <ng-container matColumnDef="name">
@@ -52,6 +60,8 @@
             </table>
 
             <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+            
           </div>
         </div>
       </div>

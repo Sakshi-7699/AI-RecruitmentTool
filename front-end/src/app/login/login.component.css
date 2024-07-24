@@ -51,7 +51,11 @@
   margin: 0 10px;
   animation: pulse 2s infinite;
 }
-
+.highlight {
+  background: radial-gradient(circle, #27e227, #25391e);
+  -webkit-background-clip: text;
+  color: transparent;
+}
 @keyframes fadeIn {
   from {
     opacity: 0;

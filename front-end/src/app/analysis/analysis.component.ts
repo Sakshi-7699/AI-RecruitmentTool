@@ -5,7 +5,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-
+import { saveAs } from 'file-saver';
+import { MatDialog } from '@angular/material/dialog';
+import { ExportDialogComponent } from '../export-dialog/export-dialog.component';
 
 interface Candidate {
   name: string;
@@ -27,7 +29,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private _formBuilder: FormBuilder, private http: HttpClient) {
+  constructor(private _formBuilder: FormBuilder, private http: HttpClient,public dialog: MatDialog) {
     this.secondFormGroup = this._formBuilder.group({
       jobDescription: ['', Validators.required],
     });
@@ -66,4 +68,43 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
     // Handle form submission logic here
   }
 
+  openExportDialog(): void {
+    const dialogRef = this.dialog.open(ExportDialogComponent, {
+      height: '350px',
+      width: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.exportData(result.rows, result.columns);
+      }
+    });
+  }
+
+  exportData(rows: number, columns: string[]): void {
+    const csvData: string[] = [];
+  
+    // Add headers
+    csvData.push(columns.join(','));
+  
+    // Add rows
+    this.dataSource.data.slice(0, rows).forEach(candidate => {
+      const row: string[] = [];
+      columns.forEach(column => {
+        // Ensure to properly escape and quote CSV fields
+        const field = candidate[column as keyof Candidate] || '';
+        row.push(`"${field}"`);
+      });
+      csvData.push(row.join(','));
+    });
+  
+    // Create CSV content
+    const csvContent =  csvData.join('\n');
+    const encodedUri = encodeURI(csvContent);
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+  
+    // Use file-saver to save the CSV file
+    saveAs(blob, `Export_${new Date().toISOString()}.csv`);
+  }
+  
 }

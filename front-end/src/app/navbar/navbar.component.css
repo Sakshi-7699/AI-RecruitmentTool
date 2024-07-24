@@ -1,5 +1,5 @@
 .custom-link {
-    color: green;
+    color: black;
     transition: background-color 0.3s;
   }
   
@@ -12,3 +12,13 @@
     color: white !important;
   }
 
+  .navbar{
+    background: linear-gradient(to right, rgb(255, 255, 255), rgb(108, 104, 104));
+    opacity: 98%;
+  }
+
+  .highlight {
+    background: radial-gradient(circle, #27e227, #25391e);
+    -webkit-background-clip: text;
+    color: transparent;
+  }

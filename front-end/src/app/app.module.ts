@@ -35,6 +35,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { AnalysisComponent } from './analysis/analysis.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ExportDialogComponent } from './export-dialog/export-dialog.component';
 
 
 
@@ -48,7 +49,8 @@ import { ProfileComponent } from './profile/profile.component';
     PagenotfoundComponent,
     AnalysisComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    ExportDialogComponent
   ],
   imports: [
     BrowserModule,

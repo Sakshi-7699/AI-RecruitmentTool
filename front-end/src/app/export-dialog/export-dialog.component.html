@@ -1,0 +1,24 @@
+<div class="dialog" style="margin: 20px;">
+
+
+    <h1 mat-dialog-title>Export Data</h1>
+    <br>
+    <div mat-dialog-content>
+    <mat-form-field appearance="fill">
+        <mat-label>Columns to Export</mat-label>
+        <input matInput [(ngModel)]="columnsToExport" placeholder="Enter columns (comma separated)">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Number of Rows to Export</mat-label>
+        <input matInput type="number" [(ngModel)]="rowsToExport" placeholder="Enter number of rows">
+    </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button (click)="onExport()">Export</button>
+    </div>
+
+
+
+</div>
