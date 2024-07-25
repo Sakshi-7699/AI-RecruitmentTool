@@ -53,3 +53,57 @@
   width: 50px; /* Adjust size as needed */
   height: 50px; /* Adjust size as needed */
 }
+
+
+/* Styling for card headers */
+.card-header {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Styling for card body */
+.card-body {
+  position: relative;
+  text-align: center;
+}
+
+/* Add shadow and border to cards */
+.card {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Add spacing between card items */
+.card-body .mt-2 {
+  margin-top: 16px;
+}
+
+/* Styling for behavioral scores */
+.list-unstyled {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.list-unstyled li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.list-unstyled span {
+  flex: 1;
+  font-size: 1rem;
+}
+
+.mat-progress-bar {
+  margin-right: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 767px) {
+  .col-md-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+

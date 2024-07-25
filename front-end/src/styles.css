@@ -1,4 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+
+
+
+}
+.highlight {
+    background: radial-gradient(circle, #27e227, #25391e);
+    -webkit-background-clip: text;
+    color: transparent;
+  }

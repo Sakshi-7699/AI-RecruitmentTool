@@ -8,7 +8,7 @@
   }
   
   .active-link {
-    background-color: green;
+    background-color: black;
     color: white !important;
   }
 
@@ -20,5 +20,5 @@
   .highlight {
     background: radial-gradient(circle, #27e227, #25391e);
     -webkit-background-clip: text;
-    color: transparent;
+    /* color: transparent; */
   }

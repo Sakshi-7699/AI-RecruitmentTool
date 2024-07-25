@@ -8,7 +8,7 @@
   </div>
 
   <div class="mt-5" [@contentAnimation]>
-    <h2>How It Works</h2>
+    <h2 ><strong class="highlight">  How It Works </strong></h2>
     <br><br>
     <div class="row text-center">
       <div class="col-md-3" *ngFor="let step of steps; let i = index">
@@ -23,10 +23,10 @@
   <div class="row mt-5" [@contentAnimation]>
     <div class="col-md-4" *ngFor="let feature of features">
       <div class="card feature-card">
-        <div class="card-body text-center">
+        <div class="card-body text-center shadow-lg">
           <!-- <mat-icon class="feature-icon">{{ feature.icon }}</mat-icon> -->
           <h5 class="card-title">{{ feature.title }}</h5>
-          <p class="card-text">{{ feature.description }}</p>
+          <p class="card-text" style="color: white;">{{ feature.description }}</p>
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@
   
   <!-- New Section for Screenshots and Explanations -->
   <div class="mt-5" [@contentAnimation]>
-    <h2>Our Features</h2>
+    <h2 ><strong class="highlight">  Our Features </strong></h2>
     <br><br>
     <div class="row align-items-center">
       <div class="col-md-6 text-center">
@@ -51,18 +51,40 @@
     </div>
   </div>
 
-  <div class="jumbotron mt-5" [@contentAnimation]>
+  <div class="jumbotron mt-3"  style="color: green; background: black; margin: 0; padding: 2%;">
     <h2>Contact Us</h2>
-    <form>
-      <div class="form-group">
-        <label for="contactEmail">Email address</label>
-        <input type="email" class="form-control" id="contactEmail" placeholder="Enter email">
+    <div class="row">
+      <div class="col-6">
+        <form>
+          <div class="form-group">
+            <label for="contactName">Name</label>
+            <input type="text" class="form-control" id="contactName" placeholder="Enter your name" required>
+          </div>
+          <div class="form-group">
+            <label for="contactEmail">Email address</label>
+            <input type="email" class="form-control" id="contactEmail" placeholder="Enter your email" required>
+          </div>
+          <div class="form-group">
+            <label for="contactPhone">Phone Number</label>
+            <input type="tel" class="form-control" id="contactPhone" placeholder="Enter your phone number">
+          </div>
+          <div class="form-group">
+            <label for="contactMessage">Message</label>
+            <textarea class="form-control" id="contactMessage" rows="4" placeholder="Enter your message" required></textarea>
+          </div>
+          <button mat-raised-button color="primary" type="submit">Submit</button>
+        </form>
       </div>
-      <div class="form-group">
-        <label for="contactMessage">Message</label>
-        <textarea class="form-control" id="contactMessage" rows="3"></textarea>
+      <div class="col-6">
+
       </div>
-      <button mat-raised-button color="primary">Submit</button>
-    </form>
+    </div>
   </div>
+  
+
+
 </div>
+
+<footer class="footer mt-5 text-center">
+  <p>&copy; {{ currentYear }} <span class="highlight">Ai-R</span>ecruitment.  All rights reserved. Created by Sakshi Gupta</p>
+</footer>

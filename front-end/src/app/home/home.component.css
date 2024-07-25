@@ -1,21 +1,23 @@
 /* home.component.css */
-body{
-  background-color: #000000;
-}
+
 .container-md {
   margin-top: 3rem;
 }
 
 .jumbotron {
-  color: white;
+  color: black;
   padding: 2rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: black;
+  /* background-color: black; */
+  background: radial-gradient(circle at top, rgba(6, 242, 61, 0.8) 30%, rgb(0, 0, 0) 70%);
   transition: transform 0.5s ease-out, opacity 0.5s ease-out;
   padding: 100px ;
   font-size: 20px;
 }
 
+.form-group{
+  margin: 2px;
+}
 .text-center {
   text-align: center;
 }
@@ -37,7 +39,7 @@ body{
 }
 
 .highlight {
-  background: radial-gradient(circle, #27e227, #25391e);
+  background: radial-gradient(circle, #193619, #25391e);
   -webkit-background-clip: text;
   color: transparent;
 }
@@ -50,8 +52,9 @@ body{
 
 .feature-card {
   background-color: black;
-  color: white;
+  color: green;
   box-shadow: #25391e;
+  opacity: 90%;
 }
 
 .step-icon {
@@ -86,3 +89,25 @@ button {
   }
 }
 
+/* Styling for the footer */
+.footer {
+  background-color: #f8f9fa; /* Light background color */
+  padding: 10px 0; /* Padding around the text */
+  color: #6c757d; /* Gray text color */
+  font-size: 0.9rem; /* Slightly smaller text */
+  border-top: 1px solid #e9ecef; /* Border on top */
+}
+
+.footer .highlight {
+  color: #007bff; /* Highlight color for branding */
+}
+
+/* Center-align the footer text */
+.footer p {
+  margin: 0; /* Remove default margins */
+}
+.highlight {
+  background: linear-gradient(to right, rgb(42, 67, 38), rgb(47, 132, 54));
+  -webkit-background-clip: text;
+  color: transparent;
+}
