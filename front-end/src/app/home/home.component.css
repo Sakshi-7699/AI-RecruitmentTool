@@ -111,3 +111,25 @@ button {
   -webkit-background-clip: text;
   color: transparent;
 }
+
+
+mat-expansion-panel {
+  background: #f9f9f9;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+mat-panel-title {
+  font-weight: bold;
+  color: black;
+}
+
+mat-expansion-panel-header {
+  background: #e0e0e0;
+  border-radius: 8px;
+}
+
+p {
+  padding: 16px;
+  color: #333;
+}
