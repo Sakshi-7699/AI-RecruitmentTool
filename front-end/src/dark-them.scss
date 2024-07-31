@@ -1,0 +1,42 @@
+/* dark-theme.scss */
+
+// Define dark colors
+$background: #121212;
+$text-primary: #ffffff;
+$text-secondary: #b0b0b0;
+
+// Apply dark theme styles
+body {
+  background-color: $background;
+  color: $text-primary;
+}
+
+mat-card {
+  background-color: #1e1e1e;
+  color: $text-primary;
+}
+
+mat-form-field .mat-form-field-label {
+  color: $text-primary;
+}
+
+mat-form-field .mat-form-field-underline {
+  background-color: $text-secondary;
+}
+
+mat-form-field .mat-form-field-ripple {
+  background-color: $text-secondary;
+}
+
+.save-button {
+  background-color: #000; /* Black color for button */
+  color: #fff; /* White text */
+}
+
+.profile-image {
+  border: 3px solid #2ecc71; /* Green border for the image */
+}
+
+.title {
+  color: #ffffff; /* White text for titles */
+}

@@ -32,6 +32,20 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
         }),
         animate('0.5s 0.5s ease-out')
       ])
+    ]),
+    trigger('loginButtonAnimation', [
+      state('normal', style({
+        transform: 'scale(1)',
+        backgroundColor: 'black',
+        color: 'green'
+      })),
+      state('hovered', style({
+        transform: 'scale(1.1)',
+        backgroundColor: '#1a1a1a'
+      })),
+      transition('normal <=> hovered', [
+        animate('0.5s ease-out')
+      ])
     ])
   ]
 })
@@ -81,4 +95,16 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  buttonState = 'normal';
+
+  onHover() {
+    this.buttonState = 'hovered';
+  }
+
+  onLeave() {
+    this.buttonState = 'normal';
+  }
+
+
 }

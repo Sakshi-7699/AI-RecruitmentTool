@@ -1,28 +1,71 @@
-/* profile.component.css */
-.container {
-    max-width: 800px;
-  }
-  
-  .mat-card {
-    margin-top: 30px;
-  }
-  
-  .mat-card-header {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .mat-form-field.full-width {
-    width: 100%;
-  }
-  
-  .profile-image {
-    max-width: 200px;
-    height: auto;
-    border-radius: 50%;
-  }
-  
-  button {
-    margin-top: 20px;
-  }
-  
+/* Center the card vertically and horizontally */
+.d-flex {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.min-vh-100 {
+  min-height: 100vh; /* Full viewport height */
+}
+
+/* Profile Card Styling */
+.profile-card {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  padding: 20px;
+  width: 100%;
+  max-width: 800px; /* Maximum width for the card */
+}
+
+/* Title Styling */
+.title {
+  color: #2c3e50; /* Darker shade of black for better readability */
+}
+
+/* Full-width Form Fields */
+.full-width {
+  width: 100%;
+}
+
+/* Button Styling */
+.save-button {
+  background-color: #000; /* Black color */
+  color: #fff; /* White text */
+}
+
+.save-button.mat-raised-button {
+  margin-top: 20px;
+}
+
+/* Profile Image Styling */
+.profile-image {
+  border: 3px solid #2ecc71; /* Green border for the image */
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+/* Form Field Appearance */
+.mat-form-field {
+  margin-bottom: 20px;
+}
+
+.mat-form-field .mat-form-field-label {
+  color: #2c3e50; /* Darker shade of black */
+}
+
+.mat-form-field .mat-form-field-underline {
+  background-color: #2ecc71; /* Green underline for form fields */
+}
+
+.mat-form-field .mat-form-field-ripple {
+  background-color: #2ecc71; /* Green ripple effect */
+}

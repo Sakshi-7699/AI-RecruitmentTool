@@ -1,54 +1,51 @@
-<!-- profile.component.html -->
-<div class="container mt-5">
-    <mat-card>
-      <mat-card-header class="text-center">
-        <mat-card-title>
-            <h3>User Profile</h3>
-        </mat-card-title>
-        <br><br><br>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="row">
-          <div class="col-md-8">
-            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-              <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Name</mat-label>
-                <input matInput formControlName="name" placeholder="Enter your name">
-              </mat-form-field>
-              <br>
-              <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Email</mat-label>
-                <input matInput formControlName="email" type="email" placeholder="Enter your email">
-              </mat-form-field>
-              <br>
-
-              <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Phone</mat-label>
-                <input matInput formControlName="phone" type="tel" placeholder="Enter your phone number">
-              </mat-form-field>
-              <br>
-
-              <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Role</mat-label>
-                <input matInput formControlName="role" placeholder="Enter your role">
-              </mat-form-field>
-              <br>
-
-              <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Company</mat-label>
-                <input matInput formControlName="company" placeholder="Enter your company">
-              </mat-form-field>
-              <br>
-
-            </form>
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+  <mat-card class="profile-card">
+    <mat-card-header class="text-center">
+      <mat-card-title>
+        <h3 class="title">User Profile</h3>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md-8">
+          <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name" placeholder="Enter your name">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" type="email" placeholder="Enter your email">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Phone</mat-label>
+              <input matInput formControlName="phone" type="tel" placeholder="Enter your phone number">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Role</mat-label>
+              <input matInput formControlName="role" placeholder="Enter your role">
+            </mat-form-field>
+            <br>
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Company</mat-label>
+              <input matInput formControlName="company" placeholder="Enter your company">
+            </mat-form-field>
+            <br>
+            <button mat-raised-button class="save-button" type="submit" [disabled]="profileForm.invalid">Save Changes</button>
+          </form>
         </div>
         <div class="col-md-4 text-center">
-            <img src="../../assets/user.png" alt="Profile Image" class="img-fluid rounded-circle profile-image">
-            <p class="text-muted mt-3">Profile Image</p>
-            <button mat-raised-button color="primary" type="submit" [disabled]="profileForm.invalid">Save Changes</button>
+          <img src="../../assets/user.png" alt="Profile Image" class="img-fluid rounded-circle profile-image">
+          <p class="text-muted mt-3">Profile Image</p>
+          <!-- Additional profile elements -->
+          <div class="mt-3">
+            <button mat-stroked-button color="accent" (click)="onSubmit()">Edit Profile</button>
           </div>
         </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -2,8 +2,13 @@
   <div class="jumbotron text-center mt-5" [@jumbotronAnimation]>
     <h1>Welcome to <span class="highlight">Ai-R</span>ecruitment</h1>
     <p>Your AI-powered recruitment solution</p>
-    <button mat-fab color="primary" routerLink="/user-login">
-      <mat-icon>login</mat-icon>
+    <button mat-fab
+            class="custom-login-button"
+            routerLink="/user-login"
+            [@loginButtonAnimation]="buttonState"
+            (mouseover)="onHover()"
+            (mouseleave)="onLeave()">
+      <mat-icon class="custom-login-icon">login</mat-icon>
     </button>
   </div>
 

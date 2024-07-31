@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, Form, UploadFile
+from fastapi import FastAPI, File, Form, Response, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 import shutil
@@ -13,6 +13,19 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel
 from typing import List
 import base64
+from fastapi import FastAPI, File, Form, UploadFile, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from typing import List
+import shutil
+import os
+import uvicorn
+from datetime import datetime
+from motor.motor_asyncio import AsyncIOMotorClient
+from pydantic import BaseModel
+from bson import ObjectId
+from fastapi.encoders import jsonable_encoder
+import base64
+
 
 app = FastAPI()
 
@@ -45,47 +58,54 @@ async def upload_file(
     behavioral_values: List[str] = Form(...)
 ):
     
-    # Define upload folder
-    upload_folder = "data/"
-    os.makedirs(upload_folder, exist_ok=True)
-    
-    # Generate unique suffix for file names
-    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    
-    # Set fixed names with unique suffix
-    resume_filename = f"resume_{timestamp}.pdf"
-    cover_letter_filename = f"cover_letter_{timestamp}.pdf"
+    try :
+        # Define upload folder
+        upload_folder = "data/"
+        os.makedirs(upload_folder, exist_ok=True)
+        
+        # Generate unique suffix for file names
+        timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        
+        # Set fixed names with unique suffix
+        resume_filename = f"resume_{timestamp}.pdf"
+        cover_letter_filename = f"cover_letter_{timestamp}.pdf"
 
-    resume_location = os.path.join(upload_folder, resume_filename)
-    cover_letter_location = os.path.join(upload_folder, cover_letter_filename)
-    
-    cover_letter.filename = cover_letter_filename
-    resume.filename = resume_filename
-    # Save resume file
-    with open(resume_location, "wb") as buffer:
-        shutil.copyfileobj(resume.file, buffer)
-    
-    # Save cover letter file
-    with open(cover_letter_location, "wb") as buffer:
-        shutil.copyfileobj(cover_letter.file, buffer)
+        resume_location = os.path.join(upload_folder, resume_filename)
+        cover_letter_location = os.path.join(upload_folder, cover_letter_filename)
+        
+        cover_letter.filename = cover_letter_filename
+        resume.filename = resume_filename
+        # Save resume file
+        with open(resume_location, "wb") as buffer:
+            shutil.copyfileobj(resume.file, buffer)
+        
+        # Save cover letter file
+        with open(cover_letter_location, "wb") as buffer:
+            shutil.copyfileobj(cover_letter.file, buffer)
 
-    # Process behavioral values
-    behavioral_values_list = eval(behavioral_values[0])
+        # Process behavioral values
+        behavioral_values_list = eval(behavioral_values[0])
 
-    algo = algorithms.Algorithms()
-    cover_letter_preprocessed = helper.get_preprocessed_text(cover_letter_location)
-    summary = algo.generate_summary(cover_letter_preprocessed)
+        algo = algorithms.Algorithms()
+        cover_letter_preprocessed = helper.get_preprocessed_text(cover_letter_location)
+        summary = algo.generate_summary(cover_letter_preprocessed)
 
-    behavioral_scores = algo.get_behavioural_scores(cover_letter_preprocessed,behavioral_values_list)
-    resume_match = algo.count_vectorizer(resume_location, job_description)
+        behavioral_scores = algo.get_behavioural_scores(cover_letter_preprocessed,behavioral_values_list)
+        resume_match = algo.count_vectorizer(resume_location, job_description)
 
-    os.remove(resume_location)
-    os.remove(cover_letter_location)
-    return {
-            "cover_letter_summary": summary,
-            "behavioral_scores" : behavioral_scores,
-            "resume_match_score" : resume_match
-            }
+        os.remove(resume_location)
+        os.remove(cover_letter_location)
+        return {
+                "cover_letter_summary": summary,
+                "behavioral_scores" : behavioral_scores,
+                "resume_match_score" : resume_match
+                }
+
+    except Exception as e:
+
+        os.remove(resume_location)
+        os.remove(cover_letter_location)
+        return {"error": str(e)}
 
 @app.post('/summarize')
 async def generate_summary(cover_letter : UploadFile = File(...)):
@@ -99,15 +119,38 @@ async def generate_summary(cover_letter : UploadFile = File(...)):
 client = AsyncIOMotorClient('mongodb+srv://sakshi:NQD0MEmPWLj4tZwj@cluster0.8f27dcp.mongodb.net/')
 db = client['AI-RECRUITMENT']
 collection = db['CANDIDATES']
+    
+from pydantic import BaseModel
+from typing import List
+from fastapi import FastAPI, Form, UploadFile, File
+from motor.motor_asyncio import AsyncIOMotorClient
+import base64
+from bson import ObjectId
+from fastapi.encoders import jsonable_encoder
 
 class Candidate(BaseModel):
-    name: str
-    resume: str  # Store as base64-encoded string
-    cover_letter: str  # Store as base64-encoded string
+    candidate_id: str
+    candidate_name: str
+    email: str
+    phone_number: str
+    address: str
+    experience: str
+    resume: str
+    cover_letter: str
+
+    class Config:
+        arbitrary_types_allowed = True
+        json_encoders = {
+            ObjectId: str
+        }
 
 @app.post("/add-candidate")
 async def upload_candidate(
     name: str = Form(...),
+    email: str = Form(...),
+    phone_number: str = Form(...),
+    address: str = Form(...),
+    experience: str = Form(...),
     resume: UploadFile = File(...),
     cover_letter: UploadFile = File(...)
 ):
@@ -117,17 +160,60 @@ async def upload_candidate(
     resume_base64 = base64.b64encode(resume_content).decode('utf-8')
     cover_letter_base64 = base64.b64encode(cover_letter_content).decode('utf-8')
 
-    candidate = Candidate(name=name, resume=resume_base64, cover_letter=cover_letter_base64)
-    result = await collection.insert_one(candidate.dict())
+    candidate = Candidate(
+        candidate_id=str(ObjectId()),
+        candidate_name=name,
+        email=email,
+        phone_number=phone_number,
+        address=address,
+        experience=experience,
+        resume=resume_base64,
+        cover_letter=cover_letter_base64
+    )
 
+    result = await collection.insert_one(jsonable_encoder(candidate))
     return {"message": "Candidate uploaded successfully", "candidate_id": str(result.inserted_id)}
 
-@app.get("/candidates/", response_model=List[Candidate])
+@app.get("/candidates/")
 async def get_candidates():
     candidates = []
-    async for candidate in collection.find():
-        candidates.append(Candidate(**candidate))
+    # async for candidate in collection.find():
+    #     candidate["candidate_id"] = str(candidate["_id"])
+    #     candidates.append(Candidate(**candidate))
+    # return candidates
+
+    async for data in  collection.find({}, {"_id": 0}) :
+        candidates.append(data)
+    print(candidates[0].keys())
     return candidates
+
+
+@app.get("/resume/{id}")
+async def get_resume(id: str):
+    candidate = await collection.find_one({"id": int(id)})
+    print(candidate)
+    if not candidate:
+        raise HTTPException(status_code=404, detail="Candidate not found")
+    
+    # resume_data = base64.b64decode(candidate['resume_html'])
+
+    return candidate['resume_html']
+    # return Response(content=resume_data, media_type="application/pdf", headers={
+    #     "Content-Disposition": f"attachment; filename={candidate['candidate_name']}_resume.pdf"
+    # })
+
+@app.get("/cover_letter/{id}")
+async def get_cover_letter(id: str):
+    candidate = await collection.find_one({"id": int(id)})
+    if not candidate:
+        raise HTTPException(status_code=404, detail="Candidate not found")
+    
+    cover_letter_data = base64.b64decode(candidate['cover_letter'])
+    return Response(content=cover_letter_data, media_type="application/pdf", headers={
+        "Content-Disposition": f"attachment; filename={candidate['name']}_cover_letter.pdf"
+    })
+
+
 
 @app.post("/auth/login")
 async def login(credentials : dict):

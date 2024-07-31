@@ -24,4 +24,16 @@ export class NavbarComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/user-login']);
   }
+
+  theme = 'light-theme';
+  toggleTheme(isDarkTheme: boolean) {
+    const theme = isDarkTheme ? 'dark-theme' : 'light-theme';
+    this.setTheme(theme);
+  }
+
+  setTheme(theme: string) {
+    document.body.classList.remove('dark-theme', 'light-theme');
+    document.body.classList.add(theme);
+    localStorage.setItem('theme', theme);
+  }
 }

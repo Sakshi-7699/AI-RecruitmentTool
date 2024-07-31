@@ -23,7 +23,8 @@ interface Candidate {
 })
 export class AnalysisComponent implements OnInit, AfterViewInit {
   secondFormGroup: FormGroup;
-  displayedColumns: string[] = ['name', 'resume', 'cover_letter'];
+  displayedColumns: string[] = ['id', 'name', 'email', 'phone_number', 'address', 'experience', 'resume', 'cover_letter'];
+
   dataSource = new MatTableDataSource<Candidate>([]);
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -105,6 +106,14 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   
     // Use file-saver to save the CSV file
     saveAs(blob, `Export_${new Date().toISOString()}.csv`);
+  }
+
+  getResumeUrl(candidateId: string): string {
+    return `http://127.0.0.1:8000/resume/${candidateId}`;
+  }
+
+  getCoverLetterUrl(candidateId: string): string {
+    return `http://127.0.0.1:8000/cover_letter/${candidateId}`;
   }
   
 }

@@ -23,35 +23,60 @@
           <div class="card-body">
             <h5 class="card-title">Candidate Data</h5>
             <div class="row">
-              <div class = "col-8">
+              <div class="col-8">
                 <mat-form-field appearance="fill" style="width: 100%;">
                   <mat-label>Search Candidate</mat-label>
                   <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
                 </mat-form-field>
-                
               </div>
-              <div class = "col-4 float-end">
-                  <button mat-raised-button (click)="openExportDialog()" class="float-end">Export Data</button>
+              <div class="col-4 float-end">
+                <button mat-raised-button (click)="openExportDialog()" class="float-end">Export Data</button>
               </div>
             </div>
             
             <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+             
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                <td mat-cell *matCellDef="let candidate">{{ candidate.id }}</td>
+              </ng-container>
+
               <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
                 <td mat-cell *matCellDef="let candidate">{{ candidate.name }}</td>
+              </ng-container>
+              
+              <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+                <td mat-cell *matCellDef="let candidate">{{ candidate.email }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="phone_number">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone Number</th>
+                <td mat-cell *matCellDef="let candidate">{{ candidate.phone_number }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="address">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+                <td mat-cell *matCellDef="let candidate">{{ candidate.address }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="experience">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Experience</th>
+                <td mat-cell *matCellDef="let candidate">{{ candidate.experience }}</td>
               </ng-container>
 
               <ng-container matColumnDef="resume">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Resume</th>
                 <td mat-cell *matCellDef="let candidate">
-                  <a [href]="candidate.resume" target="_blank">Download Resume</a>
+                  <a [href]="getResumeUrl(candidate.candidate_id)" target="_blank">Download Resume</a>
                 </td>
               </ng-container>
-
+              
               <ng-container matColumnDef="cover_letter">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Cover Letter</th>
                 <td mat-cell *matCellDef="let candidate">
-                  <a [href]="candidate.cover_letter" target="_blank">Download Cover Letter</a>
+                  <a [href]="getCoverLetterUrl(candidate.candidate_id)" target="_blank">Download Cover Letter</a>
                 </td>
               </ng-container>
 
@@ -60,7 +85,6 @@
             </table>
 
             <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-
             
           </div>
         </div>

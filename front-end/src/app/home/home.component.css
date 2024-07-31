@@ -133,3 +133,27 @@ p {
   padding: 16px;
   color: #333;
 }
+
+/* Style for the custom login button */
+.custom-login-button {
+  background-color: black;
+  /* border: 2px solid green; Green border around the button */
+  color: green; /* Green color for the icon */
+  box-shadow: #333;
+}
+
+/* Ensure the icon color is green */
+.custom-login-icon {
+  color: green;
+}
+
+/* Optional: Add hover effect */
+.custom-login-button:hover {
+  background-color: #333; /* Darker shade of black on hover */
+}
+
+/* Optional: Add focus effect */
+.custom-login-button:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 0 2px green; /* Add green outline on focus */
+}

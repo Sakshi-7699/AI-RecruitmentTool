@@ -24,7 +24,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTableModule} from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'; 
 
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -73,7 +73,8 @@ import { ExportDialogComponent } from './export-dialog/export-dialog.component';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSlideToggleModule
   ],
   providers: [
     provideAnimationsAsync(),
