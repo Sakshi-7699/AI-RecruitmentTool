@@ -4,13 +4,19 @@ import { HttpClient } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { saveAs } from 'file-saver';
-import { MatDialog } from '@angular/material/dialog';
 import { ExportDialogComponent } from '../export-dialog/export-dialog.component';
 
 interface Candidate {
+  id: number;
   name: string;
+  email: string;
+  phone_number: string;
+  address: string;
+  experience: number;
+  candidate_id: string;
   resume: string;
   cover_letter: string;
 }
@@ -19,18 +25,23 @@ interface Candidate {
   selector: 'app-analysis',
   templateUrl: './analysis.component.html',
   styleUrls: ['./analysis.component.css'],
-  
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class AnalysisComponent implements OnInit, AfterViewInit {
   secondFormGroup: FormGroup;
-  displayedColumns: string[] = ['id', 'name', 'email', 'phone_number', 'address', 'experience', 'resume', 'cover_letter'];
-
+  displayedColumns: string[] = ['id', 'name', 'experience', 'profile'];
   dataSource = new MatTableDataSource<Candidate>([]);
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private _formBuilder: FormBuilder, private http: HttpClient,public dialog: MatDialog) {
+  constructor(private _formBuilder: FormBuilder, private http: HttpClient, public dialog: MatDialog) {
     this.secondFormGroup = this._formBuilder.group({
       jobDescription: ['', Validators.required],
     });
@@ -100,7 +111,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
     });
   
     // Create CSV content
-    const csvContent =  csvData.join('\n');
+    const csvContent = csvData.join('\n');
     const encodedUri = encodeURI(csvContent);
     const blob = new Blob([csvContent], { type: 'text/csv' });
   
@@ -115,5 +126,6 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   getCoverLetterUrl(candidateId: string): string {
     return `http://127.0.0.1:8000/cover_letter/${candidateId}`;
   }
+
   
 }

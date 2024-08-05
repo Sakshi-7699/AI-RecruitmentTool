@@ -37,6 +37,7 @@ import { AnalysisComponent } from './analysis/analysis.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ExportDialogComponent } from './export-dialog/export-dialog.component';
+import { CandidateProfileComponent } from './candidate-profile/candidate-profile.component';
 
 
 
@@ -51,7 +52,8 @@ import { ExportDialogComponent } from './export-dialog/export-dialog.component';
     AnalysisComponent,
     LoginComponent,
     ProfileComponent,
-    ExportDialogComponent
+    ExportDialogComponent,
+    CandidateProfileComponent
   ],
   imports: [
     BrowserModule,

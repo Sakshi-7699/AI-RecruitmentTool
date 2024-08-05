@@ -46,37 +46,17 @@
                 <td mat-cell *matCellDef="let candidate">{{ candidate.name }}</td>
               </ng-container>
               
-              <ng-container matColumnDef="email">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
-                <td mat-cell *matCellDef="let candidate">{{ candidate.email }}</td>
-              </ng-container>
-
-              <ng-container matColumnDef="phone_number">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone Number</th>
-                <td mat-cell *matCellDef="let candidate">{{ candidate.phone_number }}</td>
-              </ng-container>
-
-              <ng-container matColumnDef="address">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
-                <td mat-cell *matCellDef="let candidate">{{ candidate.address }}</td>
-              </ng-container>
-
               <ng-container matColumnDef="experience">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Experience</th>
                 <td mat-cell *matCellDef="let candidate">{{ candidate.experience }}</td>
               </ng-container>
-
-              <ng-container matColumnDef="resume">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Resume</th>
-                <td mat-cell *matCellDef="let candidate">
-                  <a [href]="getResumeUrl(candidate.candidate_id)" target="_blank">Download Resume</a>
-                </td>
-              </ng-container>
               
-              <ng-container matColumnDef="cover_letter">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Cover Letter</th>
+              <ng-container matColumnDef="profile">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Profile</th>
                 <td mat-cell *matCellDef="let candidate">
-                  <a [href]="getCoverLetterUrl(candidate.candidate_id)" target="_blank">Download Cover Letter</a>
+                  <a [routerLink]="['/candidate-profile', candidate.id]">
+                    <mat-icon style="color: black;">open_in_new</mat-icon>
+                  </a>
                 </td>
               </ng-container>
 

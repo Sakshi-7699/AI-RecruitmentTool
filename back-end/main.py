@@ -187,6 +187,15 @@ async def get_candidates():
     print(candidates[0].keys())
     return candidates
 
+@app.get("/candidate-profile/{id}")
+async def get_candidate(id):
+    candidates = []
+   
+    async for data in  collection.find({"id": int(id)}, {"_id": 0}) :
+        candidates.append(data)
+        
+    return candidates
+
 
 @app.get("/resume/{id}")
 async def get_resume(id: str):

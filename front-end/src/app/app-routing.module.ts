@@ -7,6 +7,7 @@ import { AnalysisComponent } from './analysis/analysis.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { ProfileComponent } from './profile/profile.component';
+import { CandidateProfileComponent } from './candidate-profile/candidate-profile.component';
 
 export const routes: Routes = [
 
@@ -28,6 +29,10 @@ export const routes: Routes = [
 { 
     path: 'user-login', 
     component: LoginComponent 
+},
+{ 
+    path: 'candidate-profile/:id', 
+    component: CandidateProfileComponent 
 },
 { 
     path: '', 

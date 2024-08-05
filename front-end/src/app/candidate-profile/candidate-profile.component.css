@@ -1,0 +1,20 @@
+/* Add some padding around the mat-card */
+mat-card {
+    padding: 20px;
+  }
+  
+  /* Style form fields */
+  mat-form-field {
+    margin-bottom: 20px;
+  }
+  
+  /* Style buttons */
+  .btn {
+    display: flex;
+    align-items: center;
+  }
+  
+  .btn mat-icon {
+    margin-right: 8px;
+  }
+  
