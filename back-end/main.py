@@ -68,11 +68,19 @@ async def run_check_for_all(jobid: JobIDRequest):
     job = await job_collection.find_one({'Job Id': jobid.jobId})
     
     job_description = job['Job Description']
+    candidates = []
+    async for data in  collection.find({}, {"_id": 0}).limit(10) :
+        candidates.append(data)
     
+    for index, cadidate in enumerate(candidates[:10]) :
+        resume = cadidate["resume_str"]
+        algo = algorithms.Algorithms()
+        match_percentage = algo.run_match_on_database(resume,job_description)
+        candidates[index]['match_score'] = match_percentage
+        
+    candidates.sort(key=lambda x : x['match_score'],reverse=True)
     
-    
-    
-    return {"result": "ok"}
+    return {"result": candidates}
 
 @app.post("/upload")
 async def upload_file(   

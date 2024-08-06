@@ -52,5 +52,11 @@ class Algorithms:
             result[b] = round(s * 100, 2)
         return result
 
+    def run_match_on_database(self,resume:str, job_description:str) :
+        job_description = helper.preprocess_text(job_description)
+        resume = helper.preprocess_text(resume)
+        vectorizer = CountVectorizer()
+        count_matrix=vectorizer.fit_transform([resume, job_description])
+        return self.get_match_percentage(count_matrix)
 
         
