@@ -1,34 +1,67 @@
-.drag-drop-area {
-    border: 2px dashed #191a1b;
-    padding: 80px;
-    text-align: center;
-    cursor: pointer;
-  }
-  .drag-drop-area p {
-    margin: 0;
-  }
-  
-  .jd-area {
-    border: 2px dashed #191a1b;
-    padding: 30px;
-  }
   
   .spinner-overlay {
-    position: fixed; /* Fixed positioning to cover the entire viewport */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    background-color: rgba(255, 255, 255, 0.8); 
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000; /* Ensure the spinner is above other content */
+    z-index: 1000; 
   }
   
   .spinner-overlay mat-spinner {
-    width: 50px; /* Adjust size as needed */
-    height: 50px; /* Adjust size as needed */
+    width: 50px; 
+    height: 50px; 
   }
 
+  .job-card {
+    margin-bottom: 20px;
+  }
   
+  mat-card {
+    display:inline-flex;
+    /* flex-direction: column;
+    justify-content: space-between;
+    height: 100%; */
+    width: 30%;
+  }
+
+  .job-card {
+    margin-bottom: 20px;
+  }
+  /* job-list.component.css */
+
+.container {
+  max-width: 1200px;
+}
+
+h2 {
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.job-card {
+  width: 100%;
+}
+
+.mat-card-title,
+.mat-card-subtitle {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mat-card-actions {
+  justify-content: flex-end;
+}
+
+.mat-elevation-z8 {
+  margin-top: 1rem;
+}
+
+.mat-form-field {
+  margin-bottom: 1rem;
+}

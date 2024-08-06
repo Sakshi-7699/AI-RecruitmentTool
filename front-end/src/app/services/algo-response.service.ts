@@ -42,4 +42,10 @@ export class AlgoResponseService {
   }
 
 
+  runForAllCandidates(jobId: number): Observable<any> {
+    const body = { jobId: jobId }; 
+    return this.http.post(this.rootUrl + 'compatibility-check-all', body);
+  }
+  
+
 }

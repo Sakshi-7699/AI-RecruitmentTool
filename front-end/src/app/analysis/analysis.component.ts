@@ -8,7 +8,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { saveAs } from 'file-saver';
 import { ExportDialogComponent } from '../export-dialog/export-dialog.component';
-
+import { DatabaseService } from '../services/database.service';
+import { AlgoResponseService } from '../services/algo-response.service';
 interface Candidate {
   id: number;
   name: string;
@@ -37,15 +38,22 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   secondFormGroup: FormGroup;
   displayedColumns: string[] = ['id', 'name', 'experience', 'profile'];
   dataSource = new MatTableDataSource<Candidate>([]);
+  jobs: any = []
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private _formBuilder: FormBuilder, private http: HttpClient, public dialog: MatDialog) {
+  constructor(private _formBuilder: FormBuilder, private http: HttpClient, public dialog: MatDialog,
+              public dbservice: DatabaseService, public algoservice: AlgoResponseService
+  ) {
     this.secondFormGroup = this._formBuilder.group({
       jobDescription: ['', Validators.required],
     });
+
+    this.jobs = this.getAllJobs()
   }
+
+
 
   ngOnInit(): void {
     this.getCandidates();
@@ -74,10 +82,6 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
-
-  submit(): void {
-    // Handle form submission logic here
   }
 
   openExportDialog(): void {
@@ -126,6 +130,32 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   getCoverLetterUrl(candidateId: string): string {
     return `http://127.0.0.1:8000/cover_letter/${candidateId}`;
   }
+  
+  getAllJobs(){
+    this.dbservice.getAllJobs().subscribe(
+      data =>{
+        this.jobs = data
+      }
+    )
+  }
 
+  runJDToResumeMatch(jobId: number): void {
+    this.algoservice.runForAllCandidates(jobId).subscribe(response => {
+      console.log('Match process started', response);
+      this.updateCandidatesWithMatch(response.result)
+    }, error => {
+      console.error('Error running JD to Resume Match', error);
+    });
+  }
+
+  updateCandidatesWithMatch(results: any[]): void {
+    this.dataSource.data = this.dataSource.data.map(candidate => {
+      const match = results.find(r => r.candidate_id === candidate.id);
+      return {
+        ...candidate,
+        match_percentage: match ? match.match_percentage : 0
+      };
+    });
+  }
   
 }

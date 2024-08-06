@@ -1,31 +1,41 @@
-from fastapi import FastAPI, File, Form, Response, UploadFile
+from fastapi import FastAPI, File, Form, Response, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from typing import List
-import shutil
-import os
-import uvicorn
-import algorithms
-import json
-import helper
-from datetime import datetime
-from fastapi import FastAPI, File, UploadFile, Form
 from motor.motor_asyncio import AsyncIOMotorClient
-from pydantic import BaseModel
-from typing import List
-import base64
-from fastapi import FastAPI, File, Form, UploadFile, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from typing import List
-import shutil
-import os
-import uvicorn
-from datetime import datetime
-from motor.motor_asyncio import AsyncIOMotorClient
-from pydantic import BaseModel
-from bson import ObjectId
 from fastapi.encoders import jsonable_encoder
+from typing import List
+from pydantic import BaseModel
+from datetime import datetime
+from bson import ObjectId
 import base64
+import shutil
+import os
+import uvicorn
 
+import helper
+import algorithms
+
+class Candidate(BaseModel):
+    candidate_id: str
+    candidate_name: str
+    email: str
+    phone_number: str
+    address: str
+    experience: str
+    resume: str
+    cover_letter: str
+
+    class Config:
+        arbitrary_types_allowed = True
+        json_encoders = {
+            ObjectId: str
+        }
+
+
+client = AsyncIOMotorClient('mongodb://localhost:27017/')
+db = client['AI-RECRUITMENT']
+collection = db['CANDIDATES']
+job_collection = db['JOBS']
+    
 
 app = FastAPI()
 
@@ -49,6 +59,20 @@ def run_count_vectorizer():
     cv = algorithms.Algorithms(resume_path, job_description)
     response = cv.count_vectorizer()
     return {'Response': response}
+
+class JobIDRequest(BaseModel):
+    jobId: int
+
+@app.post("/compatibility-check-all")
+async def run_check_for_all(jobid: JobIDRequest):
+    job = await job_collection.find_one({'Job Id': jobid.jobId})
+    
+    job_description = job['Job Description']
+    
+    
+    
+    
+    return {"result": "ok"}
 
 @app.post("/upload")
 async def upload_file(   
@@ -115,34 +139,6 @@ async def generate_summary(cover_letter : UploadFile = File(...)):
     print(result)
     return result
 
-# MongoDB connection
-client = AsyncIOMotorClient('mongodb+srv://sakshi:NQD0MEmPWLj4tZwj@cluster0.8f27dcp.mongodb.net/')
-db = client['AI-RECRUITMENT']
-collection = db['CANDIDATES']
-    
-from pydantic import BaseModel
-from typing import List
-from fastapi import FastAPI, Form, UploadFile, File
-from motor.motor_asyncio import AsyncIOMotorClient
-import base64
-from bson import ObjectId
-from fastapi.encoders import jsonable_encoder
-
-class Candidate(BaseModel):
-    candidate_id: str
-    candidate_name: str
-    email: str
-    phone_number: str
-    address: str
-    experience: str
-    resume: str
-    cover_letter: str
-
-    class Config:
-        arbitrary_types_allowed = True
-        json_encoders = {
-            ObjectId: str
-        }
 
 @app.post("/add-candidate")
 async def upload_candidate(
@@ -173,18 +169,11 @@ async def upload_candidate(
 
     result = await collection.insert_one(jsonable_encoder(candidate))
     return {"message": "Candidate uploaded successfully", "candidate_id": str(result.inserted_id)}
-
 @app.get("/candidates/")
 async def get_candidates():
     candidates = []
-    # async for candidate in collection.find():
-    #     candidate["candidate_id"] = str(candidate["_id"])
-    #     candidates.append(Candidate(**candidate))
-    # return candidates
-
     async for data in  collection.find({}, {"_id": 0}) :
         candidates.append(data)
-    print(candidates[0].keys())
     return candidates
 
 @app.get("/candidate-profile/{id}")
@@ -196,7 +185,6 @@ async def get_candidate(id):
         
     return candidates
 
-
 @app.get("/resume/{id}")
 async def get_resume(id: str):
     candidate = await collection.find_one({"id": int(id)})
@@ -204,13 +192,9 @@ async def get_resume(id: str):
     if not candidate:
         raise HTTPException(status_code=404, detail="Candidate not found")
     
-    # resume_data = base64.b64decode(candidate['resume_html'])
 
     return candidate['resume_html']
-    # return Response(content=resume_data, media_type="application/pdf", headers={
-    #     "Content-Disposition": f"attachment; filename={candidate['candidate_name']}_resume.pdf"
-    # })
-
+    
 @app.get("/cover_letter/{id}")
 async def get_cover_letter(id: str):
     candidate = await collection.find_one({"id": int(id)})
@@ -222,11 +206,19 @@ async def get_cover_letter(id: str):
         "Content-Disposition": f"attachment; filename={candidate['name']}_cover_letter.pdf"
     })
 
+@app.get("/jobs/{count}")
+async def get_jobs(count):
+    data = job_collection.find({},{"_id":0}).limit(int(count))
+    jobs = []
+    async for job in data :
+        jobs.append(job)
+    return  jobs
+    
+
 
 
 @app.post("/auth/login")
 async def login(credentials : dict):
-    # Implement login logic here
     
     return {"token": credentials["username"]}
 

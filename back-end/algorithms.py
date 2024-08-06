@@ -33,7 +33,6 @@ class Algorithms:
         return self.get_match_percentage(count_matrix)
     
     def generate_summary(self,document):
-
         API_URL = API['SUMMARY']
         response = requests.post(API_URL, headers=self.headers, json={ "inputs": document})
         return response.json()[0]['summary_text']
