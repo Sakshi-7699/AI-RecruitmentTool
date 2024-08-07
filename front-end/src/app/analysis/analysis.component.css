@@ -65,3 +65,26 @@ h2 {
 .mat-form-field {
   margin-bottom: 1rem;
 }
+
+.profile-container {
+  display: flex;
+  align-items: center; 
+  gap: 8px; /* Space between elements */
+}
+
+.match-percentage {
+  margin: 0; /* Remove default margin */
+  color: #4caf50; /* Green color for match percentage */
+  font-weight: bold; /* Bold text */
+}
+
+.profile-link {
+  text-decoration: none; /* Remove underline from link */
+  display: flex; /* Ensure icon is aligned properly */
+  align-items: center; /* Align icon vertically in the center */
+}
+
+.profile-link mat-icon {
+  color: black; /* Color for the icon */
+  font-size: 24px; /* Size of the icon */
+}

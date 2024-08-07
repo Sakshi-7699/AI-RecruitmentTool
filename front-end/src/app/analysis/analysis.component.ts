@@ -10,6 +10,10 @@ import { saveAs } from 'file-saver';
 import { ExportDialogComponent } from '../export-dialog/export-dialog.component';
 import { DatabaseService } from '../services/database.service';
 import { AlgoResponseService } from '../services/algo-response.service';
+import { ChangeDetectorRef } from '@angular/core';
+
+
+
 interface Candidate {
   id: number;
   name: string;
@@ -39,12 +43,16 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'experience', 'profile'];
   dataSource = new MatTableDataSource<Candidate>([]);
   jobs: any = []
+  showScore:boolean = false
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private _formBuilder: FormBuilder, private http: HttpClient, public dialog: MatDialog,
-              public dbservice: DatabaseService, public algoservice: AlgoResponseService
+  constructor(private _formBuilder: FormBuilder, 
+              private http: HttpClient, public dialog: MatDialog,
+              public dbservice: DatabaseService, 
+              public algoservice: AlgoResponseService,
+              private changeDetectorRef: ChangeDetectorRef
   ) {
     this.secondFormGroup = this._formBuilder.group({
       jobDescription: ['', Validators.required],
@@ -62,17 +70,6 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-  }
-
-  getCandidates(): void {
-    this.http.get<Candidate[]>('http://localhost:8000/candidates/')
-      .subscribe(data => {
-        this.dataSource.data = data.map(candidate => ({
-          ...candidate,
-          resume: `data:application/pdf;base64,${candidate.resume}`,
-          cover_letter: `data:application/pdf;base64,${candidate.cover_letter}`
-        }));
-      });
   }
 
   applyFilter(event: Event): void {
@@ -139,23 +136,38 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
     )
   }
 
+  getCandidates(): void {
+    this.http.get<Candidate[]>('http://localhost:8000/candidates/')
+      .subscribe(data => {
+        this.dataSource.data = data.map(candidate => ({
+          ...candidate,
+          resume: `data:application/pdf;base64,${candidate.resume}`,
+          cover_letter: `data:application/pdf;base64,${candidate.cover_letter}`
+        }));
+      });
+  }
+
+  getAllCandidates(): void {
+    console.log('here')
+    this.http.get<Candidate[]>('http://localhost:8000/candidates/')
+      .subscribe(
+        data => {
+          this.dataSource.data = data
+          this.showScore = false
+        }
+      )
+  }
+
   runJDToResumeMatch(jobId: number): void {
     this.algoservice.runForAllCandidates(jobId).subscribe(response => {
       console.log('Match process started', response);
-      this.updateCandidatesWithMatch(response.result)
+      this.dataSource.data = response.result
+      this.showScore = true
     }, error => {
       console.error('Error running JD to Resume Match', error);
     });
   }
 
-  updateCandidatesWithMatch(results: any[]): void {
-    this.dataSource.data = this.dataSource.data.map(candidate => {
-      const match = results.find(r => r.candidate_id === candidate.id);
-      return {
-        ...candidate,
-        match_percentage: match ? match.match_percentage : 0
-      };
-    });
-  }
+
   
 }
