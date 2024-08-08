@@ -44,6 +44,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Candidate>([]);
   jobs: any = []
   showScore:boolean = false
+  loading:boolean = false
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -96,27 +97,20 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
 
   exportData(rows: number, columns: string[]): void {
     const csvData: string[] = [];
-  
-    // Add headers
     csvData.push(columns.join(','));
-  
-    // Add rows
     this.dataSource.data.slice(0, rows).forEach(candidate => {
       const row: string[] = [];
       columns.forEach(column => {
-        // Ensure to properly escape and quote CSV fields
         const field = candidate[column as keyof Candidate] || '';
         row.push(`"${field}"`);
       });
       csvData.push(row.join(','));
     });
   
-    // Create CSV content
     const csvContent = csvData.join('\n');
     const encodedUri = encodeURI(csvContent);
     const blob = new Blob([csvContent], { type: 'text/csv' });
   
-    // Use file-saver to save the CSV file
     saveAs(blob, `Export_${new Date().toISOString()}.csv`);
   }
 
@@ -137,32 +131,38 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   }
 
   getCandidates(): void {
+    this.loading = true
     this.http.get<Candidate[]>('http://localhost:8000/candidates/')
       .subscribe(data => {
         this.dataSource.data = data.map(candidate => ({
           ...candidate,
           resume: `data:application/pdf;base64,${candidate.resume}`,
           cover_letter: `data:application/pdf;base64,${candidate.cover_letter}`
+          
         }));
+        this.loading = false
       });
   }
 
   getAllCandidates(): void {
-    console.log('here')
+    this.loading = true;
     this.http.get<Candidate[]>('http://localhost:8000/candidates/')
       .subscribe(
         data => {
           this.dataSource.data = data
           this.showScore = false
+          this.loading = false
         }
       )
   }
 
   runJDToResumeMatch(jobId: number): void {
+    this.loading = true
     this.algoservice.runForAllCandidates(jobId).subscribe(response => {
       console.log('Match process started', response);
       this.dataSource.data = response.result
       this.showScore = true
+      this.loading = false
     }, error => {
       console.error('Error running JD to Resume Match', error);
     });
