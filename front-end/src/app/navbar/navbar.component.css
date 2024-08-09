@@ -1,19 +1,20 @@
 .custom-link {
-    color: black;
+    color: white;
+    background-color: black;
     transition: background-color 0.3s;
   }
   
   .custom-link:hover {
-    background-color: rgba(94, 226, 94, 0.1); /* Slight green background on hover */
+    background-color: rgba(94, 226, 94, 0.1); 
   }
   
   .active-link {
-    background-color: black;
+    background-color: green;
     color: white !important;
   }
 
   .navbar{
-    background: linear-gradient(to right, rgb(255, 255, 255), rgb(108, 104, 104));
+    background: black;
     opacity: 98%;
   }
 
