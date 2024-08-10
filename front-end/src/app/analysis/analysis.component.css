@@ -22,7 +22,7 @@
   }
   
   mat-card {
-    display:inline-flex;
+    /* display:inline-flex; */
     /* flex-direction: column;
     justify-content: space-between;
     height: 100%; */
@@ -74,7 +74,7 @@ h2 {
 
 .match-percentage {
   margin: 0; /* Remove default margin */
-  color: #4caf50; /* Green color for match percentage */
+  color: green ;
   font-weight: bold; /* Bold text */
 }
 
@@ -85,8 +85,8 @@ h2 {
 }
 
 .profile-link mat-icon {
-  color: black; /* Color for the icon */
-  font-size: 24px; /* Size of the icon */
+  color: black; 
+  font-size: 24px; 
 }
 
 .job-card {
@@ -110,3 +110,24 @@ h2 {
   cursor: pointer;
 }
 
+
+.job-listings-column {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+  margin-bottom: 50px;
+}
+
+.job-listings-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px; 
+  padding-bottom: 20px;
+}
+
+.candidates {
+  padding-left: 20px;
+  height: 100%;
+  overflow-y: auto;
+}

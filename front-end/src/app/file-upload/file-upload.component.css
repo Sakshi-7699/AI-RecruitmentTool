@@ -107,3 +107,100 @@
   }
 }
 
+/* Style for the expansion panel */
+mat-expansion-panel {
+  background-color: white;
+  color: green;
+  border-radius: 0; /* Make the panel square */
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* Style for the panel title (header) */
+mat-expansion-panel-header {
+  background-color: white;
+  color: green;
+  border-bottom: 1px solid green; /* Optional: Add a bottom border for better separation */
+}
+
+/* Ensure the text within the panel is white */
+mat-expansion-panel-header .mat-expansion-panel-header-description,
+mat-expansion-panel-body {
+  color: green;
+  background-color: white;
+}
+
+/* Optionally add a hover effect to the panel headers */
+mat-expansion-panel-header:hover {
+  background-color: #333; /* Darken the background slightly on hover */
+  color: white;
+}
+
+/* Style for mat-panel-title inside the header */
+mat-panel-title {
+  color: green;
+}
+
+/* Ensure button text remains visible */
+mat-expansion-panel .mat-expansion-panel-content button {
+  color: white;
+}
+
+
+/* Styling for the mat-card headers */
+.bg-black {
+  background-color: black;
+  color: white;
+}
+
+.text-white {
+  color: white;
+}
+
+.text-green {
+  color: green;
+}
+
+/* Center the spinner text and increase its size */
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.mx-3 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+/* Adjust the size of the spinner and text inside */
+mat-spinner {
+  height: 120px !important;
+  width: 120px !important;
+}
+
+.card-title {
+  color: green; /* Ensure that all scores have green text */
+}
+
+mat-progress-bar {
+  background-color: black; /* Background for the progress bar */
+}
+
+mat-progress-bar.mat-accent .mat-progress-bar-fill {
+  background-color: green; /* Set the fill color for progress bars */
+}

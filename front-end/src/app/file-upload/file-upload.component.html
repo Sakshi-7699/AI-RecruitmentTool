@@ -5,7 +5,8 @@
 
 
 <div class="container-fluid" style="padding: 100px;">
-
+  <h1 class="text-center" >Candidate Compatibility Checker</h1>
+  <br><br>
   <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
     <mat-expansion-panel-header>
       <mat-panel-title> Upload Candidate Data </mat-panel-title>
@@ -14,9 +15,7 @@
                 <div class="main-form">
                   <div class="container-md">
                     <div class="row">
-                      <br><br>
-                      <h1 class="text-center">Candidate Compatibility Checker</h1>
-                      <br><br><br>
+                    
                       <mat-stepper orientation="horizontal" #stepper>
                         <!-- Step 1: Candidate Data -->
                         <mat-step [stepControl]="firstFormGroup">
@@ -141,9 +140,7 @@
                 </div>
   </mat-expansion-panel>
   
-  <br>
-  <hr>
-  <br>
+<br>
 
   <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
     <mat-expansion-panel-header>
@@ -164,58 +161,63 @@
   
   
   <div *ngIf="isResponseReceived" class="container-md response">
-    <br><br>
-    <hr>
-    <br><br>
-  
-    <div class="row">
-      <!-- Resume Match Score -->
-      <div class="col-md-6 mb-4">
-        <div class="card shadow-sm border-primary">
-          <div class="card-header bg-success  text-white d-flex justify-content-between align-items-center">
-            <span>Resume to Job Description Match</span>
-            <mat-icon>thumb_up</mat-icon>
+  <br><br>
+  <hr>
+  <br><br>
+
+  <div class="row">
+    <!-- Resume Match Score -->
+    <div class="col-md-6 mb-4">
+      <mat-card class="shadow-sm border-primary">
+        <mat-card-header class="bg-black text-white d-flex justify-content-between align-items-center">
+          <span>Resume to Job Description Match</span>
+          <mat-icon>thumb_up</mat-icon>
+        </mat-card-header>
+        <mat-card-content class="text-center">
+          <div class="position-relative d-flex justify-content-center align-items-center" style="height: 120px;">
+            <mat-spinner mode="determinate" [value]="resume_match_score" diameter="120"></mat-spinner>
+            <div class="position-absolute text-green" style="font-size: 24px;">{{ resume_match_score }}%</div>
           </div>
-          <div class="card-body text-center">
-            <h5 class="card-title">Score: {{ resume_match_score }}</h5>
-            <mat-spinner mode="determinate" [value]="resume_match_score" diameter="60"></mat-spinner>
-            <!-- <p class="mt-2">{{ resume_match_description }}</p> -->
-          </div>
-        </div>
-      </div>
-  
-      <!-- Cover Letter Summary -->
-      <div class="col-md-6 mb-4">
-        <div class="card shadow-sm border-success">
-          <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
-            <span>Cover Letter Summary</span>
-            <mat-icon>assignment_turned_in</mat-icon>
-          </div>
-          <div class="card-body">
-            <p class="card-text">
-              {{ cover_letter_summary }}
-            </p>
-          </div>
-        </div>
-      </div>
+        </mat-card-content>
+      </mat-card>
     </div>
-  
-    <!-- Behavioral Scores -->
-    <div class="card shadow-sm mt-4">
-      <div class="card-body">
-        <h5 class="card-title text-center mb-4">Behavioral Scores</h5>
-        <ul class="list-unstyled">
-          <li *ngFor="let item of behavioral_scores | keyvalue" class="d-flex justify-content-between align-items-center mb-3">
-            <span><mat-icon>star</mat-icon> {{ item.key }}</span>
-            <div class="w-50">
-              <mat-progress-bar mode="determinate" [value]="item.value"></mat-progress-bar>
-            </div>
-            <span>{{ item.value }}%</span>
-          </li>
-        </ul>
-      </div>
+
+    <!-- Cover Letter Summary -->
+    <div class="col-md-6 mb-4">
+      <mat-card class="shadow-sm border-success">
+        <mat-card-header class="bg-black text-white d-flex justify-content-between align-items-center">
+          <span>Cover Letter Summary</span>
+          <mat-icon>assignment_turned_in</mat-icon>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="card-text">
+            {{ cover_letter_summary }}
+          </p>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
+
+  <!-- Behavioral Scores -->
+  <mat-card class="shadow-sm mt-4">
+    <mat-card-header class="bg-black text-white d-flex justify-content-between align-items-center">
+      <h5 class="card-title text-center mb-4"><span>Behavioral Scores</span></h5>
+      <mat-icon>scores</mat-icon>
+    </mat-card-header>
+    <mat-card-content>
+      <ul class="list-unstyled">
+        <li *ngFor="let item of behavioral_scores | keyvalue" class="d-flex justify-content-left align-items-center">
+          <span><mat-icon>star</mat-icon> {{ item.key }}</span>
+          <div class="w-50 mx-3">
+            <mat-progress-bar mode="determinate" [value]="item.value" color="accent"></mat-progress-bar>
+          </div>
+          <span>{{ item.value }}%</span>
+        </li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+</div>
+
   
 
 </div>

@@ -45,6 +45,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
   jobs: any = []
   showScore:boolean = false
   loading:boolean = false
+  isShow:boolean = false
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -132,6 +133,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
 
   getCandidates(): void {
     this.loading = true
+    this.isShow = false
     this.http.get<Candidate[]>('http://localhost:8000/candidates/')
       .subscribe(data => {
         this.dataSource.data = data.map(candidate => ({
@@ -146,6 +148,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
 
   getAllCandidates(): void {
     this.loading = true;
+    this.isShow = false
     this.http.get<Candidate[]>('http://localhost:8000/candidates/')
       .subscribe(
         data => {
@@ -163,6 +166,7 @@ export class AnalysisComponent implements OnInit, AfterViewInit {
       this.dataSource.data = response.result
       this.showScore = true
       this.loading = false
+      this.isShow = true
     }, error => {
       console.error('Error running JD to Resume Match', error);
     });
