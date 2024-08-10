@@ -1,26 +1,28 @@
-<div class="container mt-5">
+<div class="container-fluid" style="padding: 50px;">
   <!-- Job Listings Section -->
-  <div class="row mb-5">
+  <div class="row">
     <div class="col-12">
-      <h2 class="text-center mb-4">Job Listings</h2>
+      <h2 class="text-center">Job Listings</h2>
       <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-4 mb-4" *ngFor="let job of jobs">
-          <mat-card class="job-card" appearance="outlined">
+        <div class="col-md-6 col-lg-4" *ngFor="let job of jobs">
+          <mat-card class="job-card">
             <mat-card-header>
-              <mat-card-title>{{ job['Job Title'] }}</mat-card-title>
-              <mat-card-subtitle>{{ job.Qualifications }} | {{ job.Experience }}</mat-card-subtitle>
+              <mat-card-title class="card-title">{{ job['Job Title'] }}</mat-card-title>
+              <mat-card-subtitle class="card-subtitle">{{ job.Qualifications }} | {{ job.Experience }}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
-              <p>{{ job['Job Description'] }}</p>
+              <p class="card-content">{{ job['Job Description'] }}</p>
             </mat-card-content>
             <mat-card-actions class="text-center">
-              <button mat-raised-button color="primary" (click)="runJDToResumeMatch(job['Job Id'])">Run</button>
+              <button color="primary" class="center-button btn btn-outline-success shadow-sm" (click)="runJDToResumeMatch(job['Job Id'])">Run</button>
             </mat-card-actions>
           </mat-card>
         </div>
       </div>
     </div>
   </div>
+
+
 
   <hr>
 
@@ -30,7 +32,7 @@
   
 
   <!-- Candidate Data Section -->
-  <div class="candidates mt-5">
+  <div class="candidates">
     <h2 class="text-center mb-4">Candidate Data</h2>
     <div class="card">
       <div class="card-body">

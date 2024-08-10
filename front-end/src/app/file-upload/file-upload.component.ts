@@ -28,6 +28,8 @@ export class FileUploadComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
+  readonly panelOpenState = signal(false);
+  
   @ViewChild('resumeInput', { static: false }) resumeInput!: ElementRef;
   @ViewChild('coverLetterInput', { static: false }) coverLetterInput!: ElementRef;
 

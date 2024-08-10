@@ -25,6 +25,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTableModule} from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'; 
+import {MatDividerModule} from '@angular/material/divider';
+
 
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -76,7 +78,8 @@ import { CandidateProfileComponent } from './candidate-profile/candidate-profile
     MatSortModule,
     MatPaginatorModule,
     MatExpansionModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatDividerModule
   ],
   providers: [
     provideAnimationsAsync(),

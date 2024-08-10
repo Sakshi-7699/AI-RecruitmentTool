@@ -88,3 +88,25 @@ h2 {
   color: black; /* Color for the icon */
   font-size: 24px; /* Size of the icon */
 }
+
+.job-card {
+  background-color: white;
+}
+
+.card-title {
+  color: green;
+}
+
+.card-content {
+  color: black;
+}
+
+.center-button {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  color: black;
+  cursor: pointer;
+}
+
