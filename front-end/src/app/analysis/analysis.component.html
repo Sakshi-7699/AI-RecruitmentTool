@@ -3,7 +3,7 @@
   <div class="row" style="height: 100vh;">
     <!-- Job Listings Column -->
     <div class="col-4 job-listings-column">
-      <h2 ><strong class="highlight">  Job Listings </strong></h2>
+      <h2 class="highlight"> Job Listings</h2>
       <div class="row justify-content-center job-listings-scroll">
         <div *ngFor="let job of jobs">
           <mat-card class="job-card">
@@ -15,16 +15,23 @@
               <p class="card-content">{{ job['Job Description'] }}</p>
             </mat-card-content>
             <mat-card-actions class="text-center">
-              <button color="primary" class=" run-compatibility-check-btn center-button btn btn-outline-success shadow-sm" (click)="runJDToResumeMatch(job['Job Id'])">Run</button>
+              <button color="primary" class=" run-compatibility-check-btn center-button btn btn-outline-success shadow-sm" 
+                      (click)="runJDToResumeMatch(job['Job Id'])">Run</button>
             </mat-card-actions>
           </mat-card>
         </div>
       </div>
     </div>
 
+      
+  <div class="text-center spinner-overlay" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+  
+
     <!-- Candidate Data Section -->
     <div class="candidates col-8">
-      <h2 ><strong class="highlight"> Candidate Data </strong></h2>
+      <h2 class="highlight"> Candidate Data </h2>
       <div class="card">
         <div class="card-body">
           <div class="row mb-4">
@@ -58,11 +65,14 @@
               <td mat-cell *matCellDef="let candidate">{{ candidate.experience }}</td>
             </ng-container>
 
+            <!-- Conditionally Display the Profile Column -->
             <ng-container matColumnDef="profile">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>Profile</th>
               <td mat-cell *matCellDef="let candidate">
                 <div class="profile-container d-flex justify-content-between align-items-center">
-                  <p *ngIf="showScore" class="match-percentage mb-0">Match Percentage: {{ candidate.match_score }}%</p>
+                  <p *ngIf="isShow && candidate.match_score" class="match-percentage mb-0">
+                    Match Percentage: {{ candidate.match_score }}%
+                  </p>
                   <a [routerLink]="['/candidate-profile', candidate.id]" class="profile-link">
                     <mat-icon>open_in_new</mat-icon>
                   </a>
@@ -74,7 +84,7 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
 
-          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
         </div>
       </div>
     </div>

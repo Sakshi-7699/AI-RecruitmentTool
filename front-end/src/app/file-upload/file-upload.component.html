@@ -15,6 +15,7 @@
         <mat-stepper orientation="horizontal" #stepper>
           <!-- Step 1: Candidate Data -->
           <mat-step [stepControl]="firstFormGroup">
+            
             <form [formGroup]="firstFormGroup">
               <ng-template matStepLabel>Candidate Data</ng-template>
               <div class="container mt-5">
