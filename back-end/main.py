@@ -91,14 +91,11 @@ async def upload_file(
 ):
     
     try :
-        # Define upload folder
         upload_folder = "data/"
         os.makedirs(upload_folder, exist_ok=True)
         
-        # Generate unique suffix for file names
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
         
-        # Set fixed names with unique suffix
         resume_filename = f"resume_{timestamp}.pdf"
         cover_letter_filename = f"cover_letter_{timestamp}.pdf"
 
@@ -107,11 +104,9 @@ async def upload_file(
         
         cover_letter.filename = cover_letter_filename
         resume.filename = resume_filename
-        # Save resume file
         with open(resume_location, "wb") as buffer:
             shutil.copyfileobj(resume.file, buffer)
         
-        # Save cover letter file
         with open(cover_letter_location, "wb") as buffer:
             shutil.copyfileobj(cover_letter.file, buffer)
 
@@ -125,12 +120,14 @@ async def upload_file(
         behavioral_scores = algo.get_behavioural_scores(cover_letter_preprocessed,behavioral_values_list)
         resume_match = algo.count_vectorizer(resume_location, job_description)
 
+        model_match = algo.get_match_score_from_model(resume_location, job_description)
         os.remove(resume_location)
         os.remove(cover_letter_location)
         return {
                 "cover_letter_summary": summary,
                 "behavioral_scores" : behavioral_scores,
-                "resume_match_score" : resume_match
+                "resume_match_score" : resume_match,
+                "model_match_score" : model_match
                 }
 
     except Exception as e:

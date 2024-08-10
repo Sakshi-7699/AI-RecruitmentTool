@@ -1,9 +1,9 @@
-<div class="container-fluid" style="padding: 50px;">
+<div class="container-fluid" style="padding: 80px;">
   <!-- Job Listings Section -->
   <div class="row" style="height: 100vh;">
     <!-- Job Listings Column -->
     <div class="col-4 job-listings-column">
-      <h2 class="text-center">Job Listings</h2>
+      <h2 ><strong class="highlight">  Job Listings </strong></h2>
       <div class="row justify-content-center job-listings-scroll">
         <div *ngFor="let job of jobs">
           <mat-card class="job-card">
@@ -15,7 +15,7 @@
               <p class="card-content">{{ job['Job Description'] }}</p>
             </mat-card-content>
             <mat-card-actions class="text-center">
-              <button color="primary" class="center-button btn btn-outline-success shadow-sm" (click)="runJDToResumeMatch(job['Job Id'])">Run</button>
+              <button color="primary" class=" run-compatibility-check-btn center-button btn btn-outline-success shadow-sm" (click)="runJDToResumeMatch(job['Job Id'])">Run</button>
             </mat-card-actions>
           </mat-card>
         </div>
@@ -24,7 +24,7 @@
 
     <!-- Candidate Data Section -->
     <div class="candidates col-8">
-      <h2 class="text-center mb-4">Candidate Data</h2>
+      <h2 ><strong class="highlight"> Candidate Data </strong></h2>
       <div class="card">
         <div class="card-body">
           <div class="row mb-4">
@@ -35,8 +35,10 @@
               </mat-form-field>
             </div>
             <div class="col-md-4 text-right">
-              <button mat-raised-button color="primary" class="mr-2" (click)="openExportDialog()">Export Data</button>
-              <button mat-raised-button color="accent" (click)="getAllCandidates()">Load Entire Data</button>
+              <button  class="mr-2 run-compatibility-check-btn center-button btn btn-outline-success shadow-sm"
+               (click)="openExportDialog()">Export Data</button> <br>
+              <button  class="run-compatibility-check-btn center-button btn btn-outline-success shadow-sm"
+               (click)="getAllCandidates()">Load Entire Data</button>
             </div>
           </div>
 

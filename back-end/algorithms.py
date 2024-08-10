@@ -1,7 +1,10 @@
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-import helper
+from gensim.models import Doc2Vec
+from numpy.linalg import norm
+import numpy as np
 import requests
+import helper
 
 
 API = {
@@ -58,5 +61,15 @@ class Algorithms:
         vectorizer = CountVectorizer()
         count_matrix=vectorizer.fit_transform([resume, job_description])
         return self.get_match_percentage(count_matrix)
+    
+    def get_match_score_from_model(self,input_CV, input_JD) :
+        input_CV = helper.get_preprocessed_text(input_CV)
+        input_JD = helper.preprocess_text_for_model(input_JD)
+        model = Doc2Vec.load('models/cv_job_maching.model')
+        v1 = model.infer_vector(input_CV.split())
+        v2 = model.infer_vector(input_JD.split())
+        similarity = 100*(np.dot(np.array(v1), np.array(v2))) / (norm(np.array(v1)) * norm(np.array(v2)))
+        print(round(similarity, 2))
+        return similarity
 
         

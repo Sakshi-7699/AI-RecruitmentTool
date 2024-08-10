@@ -18,3 +18,49 @@ mat-card {
     margin-right: 8px;
   }
   
+
+  .profile-detail {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .profile-detail mat-icon {
+    margin-right: 10px;
+    color: #6c757d; /* Grey color for icons */
+  }
+  
+  .detail-label {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  
+  .detail-value {
+    color: #495057; /* Darker text color for better contrast */
+  }
+  
+  .btn-dark {
+    background-color: #000; /* Black background */
+    color: #fff; /* White text */
+    border: none;
+  }
+  
+  .btn-dark mat-icon {
+    margin-right: 5px;
+    color: #fff; /* Ensure icons are also white in buttons */
+  }
+  
+  .run-compatibility-check-btn {
+    
+    background-color: #000; /* Black background on hover */
+    color: #fff; /* White text on hover */
+    border: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .run-compatibility-check-btn:hover {
+    background-color: #28a745; /* Green background */
+    color: #fff; /* White text */
+  }
+  
+  

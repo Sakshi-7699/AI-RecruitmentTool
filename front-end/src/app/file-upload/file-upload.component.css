@@ -204,3 +204,17 @@ mat-progress-bar {
 mat-progress-bar.mat-accent .mat-progress-bar-fill {
   background-color: green; /* Set the fill color for progress bars */
 }
+
+.run-compatibility-check-btn {
+    
+  background-color: #000; /* Black background on hover */
+  color: #fff; /* White text on hover */
+  border: none;
+  transition: background-color 0.3s, color 0.3s;
+
+}
+
+.run-compatibility-check-btn:hover {
+  background-color: #28a745; /* Green background */
+  color: #fff; /* White text */
+}

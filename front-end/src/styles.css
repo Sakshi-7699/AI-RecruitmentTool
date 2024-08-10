@@ -8,10 +8,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
 
 }
 .highlight {
-    background: radial-gradient(circle, #27e227, #25391e);
-    -webkit-background-clip: text;
-    color: transparent;
-  }
+  background: linear-gradient(to right, rgb(42, 67, 38), rgb(47, 132, 54));
+  -webkit-background-clip: text;
+  color: transparent;
+}
 
 /* Default light theme styles */
 body.light-theme {
@@ -41,4 +41,17 @@ body.dark-theme {
 .spinner-overlay mat-spinner {
   width: 50px; /* Adjust size as needed */
   height: 50px; /* Adjust size as needed */
+}
+
+.run-compatibility-check-btn {
+    
+  background-color: #000; /* Black background on hover */
+  color: #fff; /* White text on hover */
+  border: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.run-compatibility-check-btn:hover {
+  background-color: #28a745; /* Green background */
+  color: #fff; /* White text */
 }

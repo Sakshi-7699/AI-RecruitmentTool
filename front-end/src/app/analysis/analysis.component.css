@@ -45,6 +45,7 @@ h2 {
 
 .job-card {
   width: 100%;
+  border: #000;
 }
 
 .mat-card-title,
@@ -130,4 +131,27 @@ h2 {
   padding-left: 20px;
   height: 100%;
   overflow-y: auto;
+}
+
+.highlight {
+  background: linear-gradient(to right, rgb(42, 67, 38), rgb(47, 132, 54));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.candidates{
+  background-color: whitesmoke;
+}
+
+.run-compatibility-check-btn {
+    
+  background-color: #000; /* Black background on hover */
+  color: #fff; /* White text on hover */
+  border: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.run-compatibility-check-btn:hover {
+  background-color: #28a745; /* Green background */
+  color: #fff; /* White text */
 }

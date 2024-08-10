@@ -1,6 +1,4 @@
-<div class="container-fluid">
-
-  
+<div class="container" style="padding-top: 100px;">
   <mat-card class="candidate-profile-card">
     <mat-card-header>
       <mat-card-title>
@@ -8,64 +6,52 @@
       </mat-card-title>
     </mat-card-header>
 
-    <mat-card-content>
-      <div class="row mb-4">
-        <div class="col-md-6">
-          <mat-form-field appearance="fill" class="w-100">
-            <mat-label>Email</mat-label>
-            <input matInput [value]="candidate.email" disabled>
-            <mat-icon matPrefix>email</mat-icon>
-          </mat-form-field>
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <div class="profile-detail">
+          <mat-icon>email</mat-icon>
+          <span class="detail-label">Email:</span>
+          <span class="detail-value">{{ candidate.email }}</span>
         </div>
-        <div class="col-md-6">
-          <mat-form-field appearance="fill" class="w-100">
-            <mat-label>Phone Number</mat-label>
-            <input matInput [value]="candidate.phone_number" disabled>
-            <mat-icon matPrefix>phone</mat-icon>
-          </mat-form-field>
-        </div>
-      </div>
-      
-      <div class="row mb-4">
-        <div class="col-md-12">
-          <mat-form-field appearance="fill" class="w-100">
-            <mat-label>Address</mat-label>
-            <textarea matInput [value]="candidate.address" rows="3" disabled></textarea>
-            <mat-icon matPrefix>home</mat-icon>
-          </mat-form-field>
-        </div>
-      </div>
 
-      <div class="row mb-4">
-        <div class="col-md-6">
-          <mat-form-field appearance="fill" class="w-100">
-            <mat-label>Experience</mat-label>
-            <input matInput [value]="candidate.experience" disabled>
-            <mat-icon matPrefix>work</mat-icon>
-          </mat-form-field>
+        <div class="profile-detail">
+          <mat-icon>phone</mat-icon>
+          <span class="detail-label">Phone Number:</span>
+          <span class="detail-value">{{ candidate.phone_number }}</span>
+        </div>
+
+        <div class="profile-detail">
+          <mat-icon>home</mat-icon>
+          <span class="detail-label">Address:</span>
+          <span class="detail-value">{{ candidate.address }}</span>
+        </div>
+
+        <div class="profile-detail">
+          <mat-icon>work</mat-icon>
+          <span class="detail-label">Experience:</span>
+          <span class="detail-value">{{ candidate.experience }}</span>
         </div>
       </div>
 
-      <div class="row mb-4">
-        <div class="col-md-6">
-          <a [href]="candidate.resume" target="_blank" class="btn btn-primary w-100">
-            <mat-icon>file_download</mat-icon> Download Resume
-          </a>
-        </div>
-        <div class="col-md-6">
-          <a [href]="candidate.cover_letter" target="_blank" class="btn btn-primary w-100">
-            <mat-icon>file_download</mat-icon> Download Cover Letter
-          </a>
-        </div>
+      <div class="col-md-6">
+        <a [href]="candidate.resume" target="_blank" class="btn btn-dark w-50 mb-3">
+          <mat-icon>file_download</mat-icon> Download Resume
+        </a>
+        <a [href]="candidate.cover_letter" target="_blank" class="btn btn-dark w-50 mb-3">
+          <mat-icon>file_download</mat-icon> Download Cover Letter
+        </a>
       </div>
-    </mat-card-content>
+    </div>
 
-
-    <button color="primary" class="center-button btn btn-outline-success shadow-sm" 
-    routerLink="/candidate-compatibility-check">
-    Run Candidate Compatibility Checker</button>
-
-
-
+    <!-- Button Section -->
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col-4 text-center">
+        <button class="btn run-compatibility-check-btn w-30 shadow-sm" routerLink="/candidate-compatibility-check">
+          Run Candidate Compatibility Checker
+        </button>
+      </div>
+      <div class="col-4"></div>
+    </div>
   </mat-card>
 </div>

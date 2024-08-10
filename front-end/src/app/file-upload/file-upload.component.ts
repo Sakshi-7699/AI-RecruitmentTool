@@ -128,6 +128,8 @@ export class FileUploadComponent implements OnInit {
   cover_letter_summary : string = ""
   behavioral_scores : { [key: string]: number; } = {}
   resume_match_score : number = 0
+  model_match_score : number = 0
+
   isResponseReceived : boolean = false
   loading: boolean = false; 
   
@@ -149,6 +151,7 @@ export class FileUploadComponent implements OnInit {
       this.cover_letter_summary = response['cover_letter_summary'];
       this.behavioral_scores = response['behavioral_scores'];
       this.resume_match_score = response['resume_match_score'];
+      this.model_match_score = response['model_match_score'];
       this.isResponseReceived = true; 
       
     }, error => {

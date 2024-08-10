@@ -5,148 +5,145 @@
 
 
 <div class="container-fluid" style="padding: 100px;">
-  <h1 class="text-center" >Candidate Compatibility Checker</h1>
+  <h1 class="text-center highlight" >Candidate Compatibility Checker</h1>
   <br><br>
-  <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
-    <mat-expansion-panel-header>
-      <mat-panel-title> Upload Candidate Data </mat-panel-title>
       
-    </mat-expansion-panel-header>
-                <div class="main-form">
-                  <div class="container-md">
+  <div class="main-form">
+    <div class="container-md">
+      <div class="row">
+      
+        <mat-stepper orientation="horizontal" #stepper>
+          <!-- Step 1: Candidate Data -->
+          <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+              <ng-template matStepLabel>Candidate Data</ng-template>
+              <div class="container mt-5">
+                <div class="card">
+                  <div class="card-body">
+                    <br>
+                    <h5 class="card-title">Upload Candidate Documents</h5>
+                    <br>
                     <div class="row">
-                    
-                      <mat-stepper orientation="horizontal" #stepper>
-                        <!-- Step 1: Candidate Data -->
-                        <mat-step [stepControl]="firstFormGroup">
-                          <form [formGroup]="firstFormGroup">
-                            <ng-template matStepLabel>Candidate Data</ng-template>
-                            <div class="container mt-5">
-                              <div class="card">
-                                <div class="card-body">
-                                  <br>
-                                  <h5 class="card-title">Upload Candidate Documents</h5>
-                                  <br>
-                                  <div class="row">
-                                    <!-- Resume Upload Section -->
-                                    <div class="resume-section col-md-6">
-                                      <h6>Resume</h6>
-                                      <div class="drag-drop-area" (drop)="onDrop($event, 'resume')" (dragover)="onDragOver($event)" (click)="triggerFileInput('resume')">
-                                        <p>Drag and drop your resume here, or click to select file</p>
-                                        <input type="file" (change)="onFileSelected($event, 'resume')" hidden #resumeInput>
-                                      </div>
-                                      <br>
-                                      <button mat-raised-button color="warn" (click)="resumeInput.click()">Choose Resume</button>
-                                      <ul class="list-group mt-3">
-                                        <li class="list-group-item" *ngFor="let file of resumeFiles">{{ file.name }}</li>
-                                      </ul>
-                                    </div>
-                                    <!-- Cover Letter Upload Section -->
-                                    <div class="cover-letter-section col-md-6">
-                                      <h6>Cover Letter</h6>
-                                      <div class="drag-drop-area" (drop)="onDrop($event, 'coverLetter')" (dragover)="onDragOver($event)" (click)="triggerFileInput('coverLetter')">
-                                        <p>Drag and drop your cover letter here, or click to select file</p>
-                                        <input type="file" (change)="onFileSelected($event, 'coverLetter')" hidden #coverLetterInput>
-                                      </div>
-                                      <br>
-                                      <button mat-raised-button color="accent" (click)="coverLetterInput.click()">Choose Cover Letter</button>
-                                      <ul class="list-group mt-3">
-                                        <li class="list-group-item" *ngFor="let file of coverLetterFiles">{{ file.name }}</li>
-                                      </ul>
-                                    </div>
-                                  </div>
-                                  <br><br><br>
-                                  <!-- <button mat-raised-button (click)="onUpload()" [disabled]="!resumeFiles.length || !coverLetterFiles.length">Upload</button> -->
-                                </div>
-                              </div>
-                            </div>
-                            <br><br>
-                            <div>
-                              <button mat-raised-button matStepperNext class="float-end">Next</button>
-                            </div>
-                          </form>
-                        </mat-step>
-                        
-                        <!-- Step 2: Job Description -->
-                        <mat-step [stepControl]="secondFormGroup">
-                          <form [formGroup]="secondFormGroup">
-                            <ng-template matStepLabel>Job Description</ng-template>
-                            <div class="container mt-5">
-                              <div class="card">
-                                <div class="card-body">
-                                  <h5 class="card-title">Enter Job Description</h5>
-                                  <br>
-                                  <!-- Job Description Text Area -->
-                                  <div class="form-group">
-                                    <textarea id="jobDescription" formControlName="jobDescription" class="form-control jd-area" rows="10" placeholder="Enter job description here..."></textarea>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <br><br><br>
-                            <div>
-                              <button mat-raised-button matStepperPrevious>Back</button>
-                              <button mat-raised-button matStepperNext class="float-end">Next</button>
-                            </div>
-                          </form>
-                        </mat-step>
-                        
-                        <!-- Step 3: Behavioral Values -->
-                        <mat-step>
-                          <ng-template matStepLabel>Behavioral Values</ng-template>
-                          <div class="container mt-5">
-                            <div class="card">
-                              <div class="card-body">
-                                <h5 class="card-title">Enter Behavioral Values</h5>
-                                <br>
-                                <form>
-                                  <mat-form-field class="example-chip-list" style="width : 100%">
-                                    <mat-chip-grid #chipGrid aria-label="Fruit selection">
-                                      <mat-chip-row *ngFor="let fruit of fruits()" (removed)="remove(fruit)">
-                                        {{fruit}}
-                                        <button matChipRemove [attr.aria-label]="'remove ' + fruit">
-                                          <mat-icon>cancel</mat-icon>
-                                        </button>
-                                      </mat-chip-row>
-                                    </mat-chip-grid>
-                                    <input
-                                      name="currentFruit"
-                                      placeholder="Enter new Behaviour..."
-                                      #fruitInput
-                                      [(ngModel)]="currentFruit"
-                                      [matChipInputFor]="chipGrid"
-                                      [matAutocomplete]="auto"
-                                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                                      (matChipInputTokenEnd)="add($event)"
-                                    />
-                                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                                      <mat-option *ngFor="let fruit of filteredFruits()" [value]="fruit">{{fruit}}</mat-option>
-                                    </mat-autocomplete>
-                                  </mat-form-field>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                          <br><br>
-                          <div>
-                            <button mat-raised-button matStepperPrevious>Back</button>
-                            <button mat-raised-button (click)="stepper.reset()">Reset</button>
-                            <button mat-raised-button class="float-end" (click)="submit()">Submit</button>
-                          </div>
-                        </mat-step>
-                      </mat-stepper>
+                      <!-- Resume Upload Section -->
+                      <div class="resume-section col-md-6">
+                        <h6>Resume</h6>
+                        <div class="drag-drop-area" (drop)="onDrop($event, 'resume')" (dragover)="onDragOver($event)" (click)="triggerFileInput('resume')">
+                          <p>Drag and drop your resume here, or click to select file</p>
+                          <input type="file" (change)="onFileSelected($event, 'resume')" hidden #resumeInput>
+                        </div>
+                        <br>
+                        <button class="run-compatibility-check-btn center-button btn btn-outline-success shadow-sm" 
+                          color="warn" (click)="resumeInput.click()">Choose Resume</button>
+                        <ul class="list-group mt-3">
+                          <li class="list-group-item" *ngFor="let file of resumeFiles">{{ file.name }}</li>
+                        </ul>
+                      </div>
+                      <!-- Cover Letter Upload Section -->
+                      <div class="cover-letter-section col-md-6">
+                        <h6>Cover Letter</h6>
+                        <div class="drag-drop-area" (drop)="onDrop($event, 'coverLetter')" (dragover)="onDragOver($event)" (click)="triggerFileInput('coverLetter')">
+                          <p>Drag and drop your cover letter here, or click to select file</p>
+                          <input type="file" (change)="onFileSelected($event, 'coverLetter')" hidden #coverLetterInput>
+                        </div>
+                        <br>
+                        <button class="run-compatibility-check-btn center-button btn btn-outline-success shadow-sm" 
+                          color="accent" (click)="coverLetterInput.click()">Choose Cover Letter</button>
+                        <ul class="list-group mt-3">
+                          <li class="list-group-item" *ngFor="let file of coverLetterFiles">{{ file.name }}</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <br><br><br>
+                    <!-- <button class="run-compatibility-check-btn center-button btn btn-outline-success shadow-sm" 
+                      (click)="onUpload()" [disabled]="!resumeFiles.length || !coverLetterFiles.length">Upload</button> -->
+                  </div>
+                </div>
+              </div>
+              <br><br>
+              <div>
+                <button class="run-compatibility-check-btn float-end btn btn-outline-success shadow-sm" 
+                  matStepperNext >Next</button>
+              </div>
+            </form>
+          </mat-step>
+          
+          <!-- Step 2: Job Description -->
+          <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup">
+              <ng-template matStepLabel>Job Description</ng-template>
+              <div class="container mt-5">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Enter Job Description</h5>
+                    <br>
+                    <!-- Job Description Text Area -->
+                    <div class="form-group">
+                      <textarea id="jobDescription" formControlName="jobDescription" class="form-control jd-area" rows="10" placeholder="Enter job description here..."></textarea>
                     </div>
                   </div>
                 </div>
-  </mat-expansion-panel>
+              </div>
+              <br><br><br>
+              <div>
+                <button class="run-compatibility-check-btn center-button btn btn-outline-success shadow-sm" 
+                  matStepperPrevious>Back</button>
+                <button class="run-compatibility-check-btn float-end center-button btn btn-outline-success shadow-sm" 
+                  matStepperNext >Next</button>
+              </div>
+            </form>
+          </mat-step>
+          
+          <!-- Step 3: Behavioral Values -->
+          <mat-step>
+            <ng-template matStepLabel>Behavioral Values</ng-template>
+            <div class="container mt-5">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Enter Behavioral Values</h5>
+                  <br>
+                  <form>
+                    <mat-form-field class="example-chip-list" style="width : 100%">
+                      <mat-chip-grid #chipGrid aria-label="Fruit selection">
+                        <mat-chip-row *ngFor="let fruit of fruits()" (removed)="remove(fruit)">
+                          {{fruit}}
+                          <button matChipRemove [attr.aria-label]="'remove ' + fruit">
+                            <mat-icon>cancel</mat-icon>
+                          </button>
+                        </mat-chip-row>
+                      </mat-chip-grid>
+                      <input
+                        name="currentFruit"
+                        placeholder="Enter new Behaviour..."
+                        #fruitInput
+                        [(ngModel)]="currentFruit"
+                        [matChipInputFor]="chipGrid"
+                        [matAutocomplete]="auto"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="add($event)"
+                      />
+                      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                        <mat-option *ngFor="let fruit of filteredFruits()" [value]="fruit">{{fruit}}</mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <br><br>
+            <div>
+              <button class="run-compatibility-check-btn center-button btn btn-outline-success shadow-sm" matStepperPrevious>Back</button>
+              <button class="run-compatibility-check-btn center-button btn btn-outline-success shadow-sm" (click)="stepper.reset()">Reset</button>
+              <button class="run-compatibility-check-btn float-end btn btn-outline-success shadow-sm"  (click)="submit()">Submit</button>
+            </div>
+          </mat-step>
+        </mat-stepper>
+      </div>
+    </div>
+  </div>
   
 <br>
 
-  <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
-    <mat-expansion-panel-header>
-      <mat-panel-title> Run check on a candidate from Database </mat-panel-title>
-    </mat-expansion-panel-header>
-  </mat-expansion-panel>
+
   
   
   
@@ -174,11 +171,23 @@
           <mat-icon>thumb_up</mat-icon>
         </mat-card-header>
         <mat-card-content class="text-center">
-          <div class="position-relative d-flex justify-content-center align-items-center" style="height: 120px;">
-            <mat-spinner mode="determinate" [value]="resume_match_score" diameter="120"></mat-spinner>
-            <div class="position-absolute text-green" style="font-size: 24px;">{{ resume_match_score }}%</div>
+          <div class="d-flex justify-content-around align-items-center" style="height: 120px;">
+            <!-- Resume Match Score -->
+            <div class="position-relative d-flex flex-column justify-content-center align-items-center">
+              <mat-spinner mode="determinate" [value]="resume_match_score" diameter="120"></mat-spinner>
+              <div class="position-absolute text-green" style="font-size: 24px;">{{ resume_match_score | number:'1.2-2' }}%</div>
+              <div style="margin-top: 10px;">Keyword Match</div>
+            </div>
+        
+            <!-- Model Match Score -->
+            <div class="position-relative d-flex flex-column justify-content-center align-items-center">
+              <mat-spinner mode="determinate" [value]="model_match_score" diameter="120"></mat-spinner>
+              <div class="position-absolute text-green" style="font-size: 24px;">{{ model_match_score | number:'1.2-2' }}%</div>
+              <div style="margin-top: 10px;">AI Match</div>
+            </div>
           </div>
         </mat-card-content>
+        
       </mat-card>
     </div>
 

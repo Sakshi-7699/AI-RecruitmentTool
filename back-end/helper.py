@@ -12,6 +12,13 @@ def preprocess_text(text):
     text = re.sub(r'[^\w\s]', '', text.lower())
     return text
 
+def preprocess_text_for_model(text):
+    text = text.lower()
+    text = re.sub('[^a-z]', ' ', text)
+    text = re.sub(r'\d+', '', text)
+    text = ' '.join(text.split())
+    return text
+
 def extract_text_from_pdf_path(pdf_path):
     with open(pdf_path, 'rb') as file:
         reader = PyPDF2.PdfReader(file)
