@@ -165,14 +165,14 @@
 
   <div class="row">
     <!-- Resume Match Score -->
-    <div class="col-md-6 mb-4">
-      <mat-card class="shadow-sm border-primary">
+    <div class="col-6">
+      <mat-card class="shadow-sm border-primary" style="height: 250px;">
         <mat-card-header class="bg-black text-white d-flex justify-content-between align-items-center">
           <span>Resume to Job Description Match</span>
           <mat-icon>thumb_up</mat-icon>
         </mat-card-header>
         <mat-card-content class="text-center">
-          <div class="d-flex justify-content-around align-items-center" style="height: 120px;">
+          <div class="d-flex justify-content-around align-items-center" style="padding: 20px;" >
             <!-- Resume Match Score -->
             <div class="position-relative d-flex flex-column justify-content-center align-items-center">
               <mat-spinner mode="determinate" [value]="resume_match_score" diameter="120"></mat-spinner>
@@ -193,8 +193,8 @@
     </div>
 
     <!-- Cover Letter Summary -->
-    <div class="col-md-6 mb-4">
-      <mat-card class="shadow-sm border-success">
+    <div class="col-6">
+      <mat-card class="shadow-sm border-success" style="height: 250px;">
         <mat-card-header class="bg-black text-white d-flex justify-content-between align-items-center">
           <span>Cover Letter Summary</span>
           <mat-icon>assignment_turned_in</mat-icon>
@@ -211,7 +211,7 @@
   <!-- Behavioral Scores -->
   <mat-card class="shadow-sm mt-4">
     <mat-card-header class="bg-black text-white d-flex justify-content-between align-items-center">
-      <h5 class="card-title text-center mb-4"><span>Behavioral Scores</span></h5>
+      <h5 class="card-title text-center mb-4"><span style="color: white;">Behavioral Scores</span></h5>
       <mat-icon>scores</mat-icon>
     </mat-card-header>
     <mat-card-content>
