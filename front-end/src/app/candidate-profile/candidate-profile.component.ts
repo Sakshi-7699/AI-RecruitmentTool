@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class CandidateProfileComponent implements OnInit {
   candidateId!: string;
   candidate: any;
+  show : boolean = false;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
@@ -25,5 +26,9 @@ export class CandidateProfileComponent implements OnInit {
       .subscribe(data => {
         this.candidate = data[0];
       });
+  }
+
+  showResume():void{
+    this.show = !this.show;
   }
 }

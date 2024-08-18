@@ -34,9 +34,11 @@
       </div>
 
       <div class="col-md-6">
-        <a [href]="candidate.resume" target="_blank" class="btn btn-dark w-50 mb-3">
-          <mat-icon>file_download</mat-icon> Download Resume
-        </a>
+       
+        <button (click)="showResume()" class="btn btn-dark w-50 mb-3">
+          <mat-icon>visibility</mat-icon>
+          {{ show ? 'Hide Resume' : 'Show Resume' }}
+        </button>
         <a [href]="candidate.cover_letter" target="_blank" class="btn btn-dark w-50 mb-3">
           <mat-icon>file_download</mat-icon> Download Cover Letter
         </a>
@@ -55,3 +57,9 @@
     </div>
   </mat-card>
 </div>
+
+<div class="container"  *ngIf="show">
+  <br><br>
+  <div [innerHtml]="candidate.resume_html | safeHtml"></div>
+</div>
+ 

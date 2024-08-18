@@ -40,6 +40,7 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ExportDialogComponent } from './export-dialog/export-dialog.component';
 import { CandidateProfileComponent } from './candidate-profile/candidate-profile.component';
+import { SafeHtmlPipe } from './safe-html.pipe';
 
 
 
@@ -55,7 +56,8 @@ import { CandidateProfileComponent } from './candidate-profile/candidate-profile
     LoginComponent,
     ProfileComponent,
     ExportDialogComponent,
-    CandidateProfileComponent
+    CandidateProfileComponent,
+    SafeHtmlPipe
   ],
   imports: [
     BrowserModule,
