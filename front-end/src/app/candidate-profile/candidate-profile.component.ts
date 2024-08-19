@@ -11,7 +11,7 @@ export class CandidateProfileComponent implements OnInit {
   candidateId!: string;
   candidate: any;
   show : boolean = false;
-
+  showCV : boolean = false;
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -30,5 +30,9 @@ export class CandidateProfileComponent implements OnInit {
 
   showResume():void{
     this.show = !this.show;
+  }
+
+  showCoverLetter():void{
+    this.showCV = !this.showCV;
   }
 }

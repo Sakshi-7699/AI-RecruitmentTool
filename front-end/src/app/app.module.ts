@@ -41,6 +41,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ExportDialogComponent } from './export-dialog/export-dialog.component';
 import { CandidateProfileComponent } from './candidate-profile/candidate-profile.component';
 import { SafeHtmlPipe } from './safe-html.pipe';
+import { Base64DecodePipe } from './base64-decode.pipe';
 
 
 
@@ -57,7 +58,8 @@ import { SafeHtmlPipe } from './safe-html.pipe';
     ProfileComponent,
     ExportDialogComponent,
     CandidateProfileComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    Base64DecodePipe
   ],
   imports: [
     BrowserModule,
